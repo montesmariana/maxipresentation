@@ -1,0 +1,106 @@
+---
+title: "Cloud gazing"
+subtitle: "Methodological triangulation in corpus-based distributional semantics"
+author: "Mariana Montes <br> Supervisors: Dirk Geeraerts, Dirk Speelman & Benedikt Szmrecsanyi"
+institute: "QLVL"
+date: "19/03/2021"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    css: [xaringan-themer.css, custom.css]
+---
+class: inverse, center, middle
+
+```{r xaringanthemer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(base_color = "#03763d")
+
+```
+
+# Nephological Semantics project
+
+---
+
+# Nephological Semantics project
+
+.center[C1 project (KU Leuven)]
+
+--
+
+### Members
+- PI: Dirk Geeraerts
+- Also: Dirk Speelman, Benedikt Szmercsanyi, Stefania Marzo, Kris Heylen, Weiwei Zhang, Karlien Franco, Stefano De Pascale
+
+--
+### Goal
+Understand and develop tools for distributional semantics
+- Python module to create count-based token-level vector space models (will explain)
+- Visualization tool for exploration
+- Code and manual to make the most of our data &#128522;
+
+---
+
+# Semasiological work package
+
+.center[(where this PhD is inserted)]
+
+- How can we use vector space models to study polysemy?
+- What can we learn from the visual analytics tool?
+
+???
+
+Rethink: what are the broad questions?
+
+---
+class: inverse, center
+
+# In this presentation I will...
+
+### explain: What are vector space models?
+### show: how do we use the visualization tool?
+### argue: why should you care?
+
+---
+
+# What are vector space models?
+
+---
+
+# Case studies;
+## 32 Dutch nouns, verbs and adjectives
+
+---
+
+# Semantic annotation
+
+- Assign a sense from a simplified set
+
+- If no sense could be assigned, explain why
+
+- Indicate which context words helped the decision
+
+---
+
+# How do we use the visualization tool?
+
+---
+
+# Why should you care?
+
+(results?)
+
+---
+class: inverse, center, middle
+
+# Thank you!
+
+.whitebox[
+
+[mariana.montes@kuleuven.be](mailto:mariana.montes@kuleuven.be)
+
+`r icons::icon_style(icons::fontawesome("cloud-meatball"), fill="#03763d")` [https://montesmariana.github.io/NephoVis/](https://montesmariana.github.io/NephoVis/)
+]
