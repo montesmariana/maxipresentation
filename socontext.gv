@@ -13,8 +13,8 @@ digraph {
     shape = plaintext
     ]
   e [label = "Weight vectors?"]
-  f [label = "Filter by part-of-speech?"]
-  g [label = "How many dimensions?"]
+  f [label = "PoS filter"]
+  g [label = "Length"]
   h [label = "..."]
   
   edge [

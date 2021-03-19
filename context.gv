@@ -9,11 +9,11 @@ digraph {
     ]
     
   a [label = "Syntactic information?"]
-  b [label = "Window size?"]
-  b2 [label = "Part of speech filter?"]
-  c [label = "How far in the tree?"]
-  c2 [label = "Which kind of pattern?"]
+  c [label = "Number of steps"]
+  c2 [label = "Kind of patterns"]
   d [label = "Filter by association strength?"]
+  b [label = "Window size"]
+  b2 [label = "PoS filter"]
   
   edge [
     color = darkgreen,

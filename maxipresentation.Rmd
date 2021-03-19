@@ -100,7 +100,7 @@ printOutline(outline, 1)
 
 ]
 
-.pull-left[
+.pull-right[
 
 - Kris Heylen
 - Weiwei Zhang
@@ -112,7 +112,7 @@ printOutline(outline, 1)
 
 ---
 
-# Nephological Semantics project
+# Nephological Semantics
 
 ### Goal
 
@@ -149,27 +149,6 @@ E.g. *A good window size is enough to distinguish homonyms, but PMI weighting is
 
 - ...and more!
 
-<!-- --- -->
-
-<!-- # Semasiological work package -->
-
-<!-- ### `r fontawesome("exclamation")` Models don't consistently disambiguate senses -->
-
-<!-- -- -->
-
-<!-- - How do context words work (what do they say of our target)? -->
-
-<!-- - What can we learn from these models? -->
-
-<!-- ??? -->
-
-<!-- Method as team of Fair Witnesses (in terms of Heinlein's *Stranger in a Strange Land*, 1961) -->
-<!-- that could show us things we don't think of, going beyond what we expect to find. -->
-
-<!-- We do not want to assume there is a golden standard (but what if we do? What if we want it?) -->
-
-<!-- -> point out to neural networks!! -->
-
 ---
 
 # Outline
@@ -183,7 +162,7 @@ name: vsm-intro
 
 # What are vector space models?
 
-**word vectors** &rarr; numerical representations of words
+.center[**word vectors** &rarr; numerical representations of words]
 
 ```{r echo=FALSE}
 vex <- read_csv("vectorexample.csv", col_types = cols()) %>%
@@ -198,7 +177,11 @@ kable(slice(vex, 1))
 <br> 
 $$PMI_{(linguistics, language)} = \log\frac{p(linguistics, language)}{p(linguistics)p(language)}$$
 
-.footnote[`r fontawesome("info-circle")` Actual values from GloWbE (Global Web-based English corpus).]
+.footnote[
+`r fontawesome("info-circle")`
+Actual values from GloWbE (Global Web-based English corpus), with a window-span of 10 words to either side.
+
+PMI: [Pointwise Mutual information](https://en.wikipedia.org/wiki/Pointwise_mutual_information)]
 
 ---
 template: vsm-intro
@@ -237,7 +220,7 @@ $$PMI_{(linguistics, language)} = \log\frac{285}{20,740\times 1.58 \times 10^6} 
 # Type level vectors
 
 - Each row is the vector of a word
-   - aggregating over **all** its occurrences
+   - aggregating over all its occurrences
 
 - Each column is a context feature
 
@@ -320,11 +303,13 @@ kbl(s2, escape=FALSE)
 ### Token level vectors
 
 .center[
-.bb.b--orange.ph3[.orange[(1)] Would you like to **study** *linguistics*?]
+.bb.b--gold.shadow-1.pv1.ph2[.gold.b[(1)] Would you like to **study** *linguistics*?]
 
-.bb.b--blue.ph3[.blue[(2)] They **study** this in *computational linguistics* too.]
+<br>
+.bb.b--light-blue.shadow-1.pv1.ph2[.light-blue.b[(2)] They **study** this in *computational linguistics* too.]
 
-.bb.b--green.ph3[.green[(3)] I eat *chocolate* while I **study**.]
+<br>
+.bb.b--green.shadow-1.mt4.pv1.ph2[.green.b[(3)] I eat *chocolate* while I **study**.]
 
 ]
 
@@ -344,11 +329,11 @@ read_csv("tokensexample.csv", col_types = cols()) %>%
 
 #### Original text
 
-.gold[(1)] Would you like to **study** *linguistics*?
+.gold.b[(1)] Would you like to **study** *linguistics*?
 
-.blue[(2)] They **study** this in *computational linguistics* too.
+.light-blue.b[(2)] They **study** this in *computational linguistics* too.
 
-.green[(3)] I eat *chocolate* while I **study**.
+.green.b[(3)] I eat *chocolate* while I **study**.
 
 ]
 
@@ -367,7 +352,7 @@ read_csv("tokensexample.csv", col_types = cols()) %>%
 
 --
 
-.pull-left[
+.pull-left.dist[
 
 #### Token-token distance matrix
 ```{r, echo=FALSE, eval=require("kableExtra")}
@@ -397,7 +382,7 @@ class: center
 .ba.br3.bw1.shadow-3.b--dark-green.bg-washed-green[
 We represent a word
 
-.small[(one occurrence, or all the occurrences)]
+.i[(types and tokens)]
 
 with its (textual) context.
 ]
@@ -406,7 +391,7 @@ with its (textual) context.
 
 # BUT
 
-### How do you define the "context"?
+### How do you define the context?
 
 ---
 class: center
@@ -416,7 +401,7 @@ class: center
 .pull-left[
 ### First order
 
-`r fontawesome("arrow-alt-circle-down")`
+<!-- `r fontawesome("arrow-alt-circle-down")` -->
 
 The context of each token
 
@@ -445,17 +430,18 @@ The context of each token
 
 ]
 
---
+<!-- -- -->
+
 .pull-right[
 ### Second order
 
-`r fontawesome("arrow-alt-circle-down")`
+<!-- `r fontawesome("arrow-alt-circle-down")` -->
 
 The context of the context
 
 .panelset[
 
-  .panel[.panel-name[i]
+  .panel[.panel-name[I]
   *PMI window: 10; all words*
   
 ```{r, echo=FALSE}
@@ -465,7 +451,7 @@ kbl(vex, escape=FALSE) %>%
 
   ]
   
-  .panel[.panel-name[ii]
+  .panel[.panel-name[II]
   *PMI window: 10; no adjectives*
   
 ```{r, echo=FALSE}
@@ -475,7 +461,7 @@ kbl(select(vex, -ends_with("j")), escape=FALSE) %>%
 
   ]
   
-  .panel[.panel-name[iii]
+  .panel[.panel-name[III]
   *PMI window: 4; all words*
   
 ```{r, echo=FALSE}
@@ -488,7 +474,7 @@ read_csv("vectorexample2.csv", col_types = cols()) %>%
 ```
   ]
   
-  .panel[.panel-name[iv]
+  .panel[.panel-name[IV]
   *PMI window:10; same columns as rows*
   
 ```{r, echo=FALSE}
@@ -563,7 +549,7 @@ tibble(
 1. Indicate which context words helped the decision
 
 
-.halfsize.shadow-5.center [
+.halfsize.shadow-5.center[
 ![annotation example](gifs/annotation.gif)
 ]
 
@@ -690,26 +676,63 @@ printOutline(outline, 6)
 
 # Discussion
 
-- No set of parameters identifies "senses" reliably (~~best model~~).
+.bg-washed-green.shadow-2.pv1.ph2.center[
+No set of parameters identifies "senses" reliably, across the board.
+]
 
-    - Discrete senses are an abstraction and don't exist in the wild.
+- Not even within part-of-speech.
+
+- Unrelated to number of senses.
+
 --
 
-- Vector space models identify collocational patterns.
+.bg-washed-green.shadow-2.pv1.ph2.center[
+Vector space models identify collocational patterns
 
-    - Are there strong, recurrent patterns?
-    - Are they very different from each other?
-    - Are they driven by more lexical or syntactic items?
+which may or may not match "senses".
+]
 
+- Are there strong, recurrent patterns?
+
+- Are they very different from each other?
+
+- Are they driven by more lexical or syntactic items?
+
+???
+
+Discrete senses are an abstraction and don't exist in the wild.
+
+---
+
+# What is all this for?
+
+.center.ttc.f3[
+Guidelines for
+
+**Corpus-based semasiological research**]
+
+- Does it work? How?
+
+- What can you expect and how do you get it?
+
+- How to interpret basic shapes?
+
+- Parameters you should definitely include (e.g. part-of-speech filters)
+
+- Parameters you can forget about (e.g. very long vectors)
+
+--
+
+- Is it worth all the trouble?
 
 ---
 class: inverse, center, middle
 
 # Thank you!
 
-.whitebox[
+.bg-white.br4.pv1[
 
 [mariana.montes@kuleuven.be](mailto:mariana.montes@kuleuven.be)
 
-`r icons::icon_style(icons::fontawesome("cloud-meatball"), fill="#03763d")` [https://montesmariana.github.io/NephoVis/](https://montesmariana.github.io/NephoVis/)
+`r icon_style(fontawesome("cloud-meatball"), fill="#03763d")` [https://montesmariana.github.io/NephoVis/](https://montesmariana.github.io/NephoVis/)
 ]
