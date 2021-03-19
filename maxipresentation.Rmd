@@ -1,8 +1,8 @@
 ---
-title: "Cloud gazing"
-subtitle: "Methodological triangulation in corpus-based distributional semantics"
-author: "Mariana Montes <br> Supervisors: Dirk Geeraerts, Dirk Speelman & Benedikt Szmrecsanyi"
-institute: "QLVL"
+title: "Cloud spotting"
+subtitle: "Visual analytics for distributional semantics"
+author: "Mariana Montes <br> <small>Supervisors: Dirk Geeraerts, Dirk Speelman & Benedikt Szmrecsanyi</small>"
+institute: "![qlvl white icon](icons/qlvl-white.png){width=1in}"
 date: "19/03/2021"
 output:
   xaringan::moon_reader:
@@ -11,87 +11,696 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+      beforeInit: "myjs.js"
     css: [xaringan-themer.css, custom.css]
 ---
-class: inverse, center, middle
 
 ```{r xaringanthemer, include=FALSE, warning=FALSE}
-library(xaringanthemer)
-style_mono_accent(base_color = "#03763d")
+options(htmltools.dir.version = FALSE)
 
+library(xaringanthemer)
+library(knitr); library(tidyverse)
+library(icons)
+library(kableExtra)
+
+style_mono_accent(
+  base_color = "#03763d",
+  colors = c(
+    white = "#FFFFFF",
+    gray = "#A9A9A9"
+  )
+  )
+down_arrow <- icon_style(fontawesome("angle-double-down"), fill = "#03763d")
+ci <- icon_set("icons")
+
+outline <- c(
+  "Nephological Semantics project",
+  "Vector space models",
+  "Case studies",
+  "Visualization tool",
+  "Preliminary results",
+  "Discussion"
+)
+
+printOutline <- function(outline, highlight = double()) {
+  if (length(highlight) > 0) {
+    for (i in highlight) {
+      outline[[i]] <- sprintf("**%s**", outline[[i]])
+    }
+    if (min(highlight) > 1) {
+      for (i in 1:(min(highlight)-1)) {
+        outline[[i]] <- sprintf(".gray[%s]", outline[[i]])
+      }
+    }
+  }
+  walk(paste("- ", outline, "\n\n"), cat)
+}
 ```
 
-# Nephological Semantics project
+```{r xaringanExtra, eval=require("xaringanExtra"), echo=FALSE}
+library(xaringanExtra)
+use_panelset()
+#use_animate_css()
+use_logo(
+  image_url = "icons/cloud-qlvl.png",
+  width = "90px",
+  link_url = "https://www.arts.kuleuven.be/ling/qlvl/projects/current/nephological-semantics"
+)
+use_tachyons()
+```
+
+# Outline
+
+```{r, echo = FALSE, results="asis"}
+printOutline(outline)
+```
 
 ---
 
-# Nephological Semantics project
+# Outline
+
+```{r, echo = FALSE, results="asis"}
+printOutline(outline, 1)
+```
+
+---
+
+# Nephological Semantics
 
 .center[C1 project (KU Leuven)]
 
 --
 
-### Members
-- PI: Dirk Geeraerts
-- Also: Dirk Speelman, Benedikt Szmercsanyi, Stefania Marzo, Kris Heylen, Weiwei Zhang, Karlien Franco, Stefano De Pascale
+### Current members
+.pull-left[
+- Dirk Geeraerts (PI)
+- Dirk Speelman
+- Benedikt Szmrecsanyi
+- Stefania Marzo
 
---
+]
+
+.pull-left[
+
+- Kris Heylen
+- Weiwei Zhang
+- Karlien Franco
+- Stefano De Pascale
+- Mariana Montes
+
+]
+
+---
+
+# Nephological Semantics project
+
 ### Goal
+
 Understand and develop tools for distributional semantics
-- Python module to create count-based token-level vector space models (will explain)
-- Visualization tool for exploration
-- Code and manual to make the most of our data &#128522;
+- `r simple_icons("python")` Python module to create count-based token-level vector space models
+
+- `r simple_icons("d3-dot-js")` Visualization tool for exploration 
+
+- Case studies, code and manual to make the most of our data: `r simple_icons("python")` + `r simple_icons("r")` + `r simple_icons("javascript")`
+
+### Work packages
+
+- Lectometry
+
+- Onomasiology
+
+- **Semasiology**
 
 ---
 
 # Semasiological work package
 
-.center[(where this PhD is inserted)]
+<!-- .center[(where this PhD is inserted)] -->
 
-- How can we use vector space models to study polysemy?
-- What can we learn from the visual analytics tool?
+### Using distributional semantics to study polysemy
 
-???
+- Which models perform best?
 
-Rethink: what are the broad questions?
+E.g. *Models that use a window size of 10 and exclude prepositions are the best at disambiguating senses.*
+
+- How do the models handle granularity of meaning?
+
+E.g. *A good window size is enough to distinguish homonyms, but PMI weighting is necessary to distinguish senses within a homonym.*
+
+- ...and more!
+
+<!-- --- -->
+
+<!-- # Semasiological work package -->
+
+<!-- ### `r fontawesome("exclamation")` Models don't consistently disambiguate senses -->
+
+<!-- -- -->
+
+<!-- - How do context words work (what do they say of our target)? -->
+
+<!-- - What can we learn from these models? -->
+
+<!-- ??? -->
+
+<!-- Method as team of Fair Witnesses (in terms of Heinlein's *Stranger in a Strange Land*, 1961) -->
+<!-- that could show us things we don't think of, going beyond what we expect to find. -->
+
+<!-- We do not want to assume there is a golden standard (but what if we do? What if we want it?) -->
+
+<!-- -> point out to neural networks!! -->
 
 ---
-class: inverse, center
 
-# In this presentation I will...
+# Outline
 
-### explain: What are vector space models?
-### show: how do we use the visualization tool?
-### argue: why should you care?
+```{r, echo = FALSE, results="asis"}
+printOutline(outline, 2)
+```
 
 ---
+name: vsm-intro
 
 # What are vector space models?
 
+**word vectors** &rarr; numerical representations of words
+
+```{r echo=FALSE}
+vex <- read_csv("vectorexample.csv", col_types = cols()) %>%
+  select(target, `language/n`, `word/n`, `english/j`, `speak/v`, everything()) %>% 
+  mutate_if(is.numeric, round, 2)
+
+kable(slice(vex, 1))
+```
+
+--
+
+<br> 
+$$PMI_{(linguistics, language)} = \log\frac{p(linguistics, language)}{p(linguistics)p(language)}$$
+
+.footnote[`r fontawesome("info-circle")` Actual values from GloWbE (Global Web-based English corpus).]
+
+---
+template: vsm-intro
+
+<br>
+
+$$PMI_{(linguistics, language)} = \log\frac{\frac{285}{N}}{p(linguistics)p(language)}$$
+---
+template: vsm-intro
+
+<br>
+
+$$PMI_{(linguistics, language)} = \log\frac{\frac{285}{N}}{\frac{20,740}{N}\frac{1.58 \times 10^6}{N}}$$
 ---
 
-# Case studies;
+template: vsm-intro
+
+<br>
+
+$$PMI_{(linguistics, language)} = \log\frac{285}{20,740\times 1.58 \times 10^6} N$$
+---
+
+template: vsm-intro
+
+<br>
+
+$$PMI_{(linguistics, language)} = \log\frac{285}{20,740\times 1.58 \times 10^6} 9.14 \times 10^8$$
+---
+template: vsm-intro
+
+<br>
+
+$$PMI_{(linguistics, language)} = \log\frac{285}{20,740\times 1.58 \times 10^6} 9.14 \times 10^8 = 4.37$$
+---
+
+# Type level vectors
+
+- Each row is the vector of a word
+   - aggregating over **all** its occurrences
+
+- Each column is a context feature
+
+```{r echo=FALSE, eval=require("kableExtra")}
+kbl(vex, escape=FALSE)
+```
+
+---
+name: study-tokens
+
+# Token level vectors
+
+### Tokens of *to study*
+
+(1) Would you like to **study** linguistics?
+
+(2) They **study** this in computational linguistics too.
+
+(3) I eat chocolate while I **study**.
+
+<hr>
+
+--
+
+.center[(1) Would you like to **study** *linguistics*?]
+
+```{r, echo=FALSE, eval=require("kableExtra")}
+vex %>% filter(target == "linguistics/n") %>%
+  rename(`context feature` = target) %>% kbl()
+```
+
+---
+template: study-tokens
+
+.center[(2) They **study** this in *computational linguistics* too.]
+
+```{r, echo=FALSE, eval=require("kableExtra")}
+vex %>%
+  filter(target %in% c("linguistics/n", "computational/j")) %>%
+  rename(`context feature` = target) %>% kbl()
+```
+
+---
+
+### Merging vectors
+
+.center[(2) They **study** this in *computational linguistics* too.]
+
+```{r, echo=FALSE, eval=require("kableExtra")}
+vex %>%
+  filter(target %in% c("linguistics/n", "computational/j")) %>%
+  rename(`context feature` = target) %>% kbl()
+```
+
+--
+<br>
+
+.center[
+`r down_arrow`
+`r down_arrow`
+`r down_arrow`
+`r down_arrow`
+`r down_arrow`
+]
+
+<br>
+
+```{r, echo=FALSE, eval=require("kableExtra")}
+s2 <- vex %>%
+  filter(target %in% c("linguistics/n", "computational/j")) %>%
+  select(-target) %>% colSums() %>% as_tibble_row() %>% 
+  mutate(target = "study<sub>2</sub>") %>% 
+  select(target, everything())
+kbl(s2, escape=FALSE)
+
+```
+
+---
+
+### Token level vectors
+
+.center[
+.bb.b--orange.ph3[.orange[(1)] Would you like to **study** *linguistics*?]
+
+.bb.b--blue.ph3[.blue[(2)] They **study** this in *computational linguistics* too.]
+
+.bb.b--green.ph3[.green[(3)] I eat *chocolate* while I **study**.]
+
+]
+
+<br>
+
+.center[
+```{r, echo=FALSE, eval=require("kableExtra")}
+read_csv("tokensexample.csv", col_types = cols()) %>%
+  kbl(escape = FALSE) %>% 
+  column_spec(1, color = colorblindr::palette_OkabeIto[1:3], bold=TRUE)
+```
+]
+
+---
+
+.pull-left[
+
+#### Original text
+
+.gold[(1)] Would you like to **study** *linguistics*?
+
+.blue[(2)] They **study** this in *computational linguistics* too.
+
+.green[(3)] I eat *chocolate* while I **study**.
+
+]
+
+
+.pull-right[
+#### Token-context matrix
+
+```{r, echo=FALSE, eval=require("kableExtra")}
+read_csv("tokensexample.csv", col_types = cols()) %>%
+  kbl(escape = FALSE) %>% 
+  kable_styling(font_size = 11) %>% 
+  column_spec(1, color = colorblindr::palette_OkabeIto[1:3], bold=TRUE)
+```
+
+]
+
+--
+
+.pull-left[
+
+#### Token-token distance matrix
+```{r, echo=FALSE, eval=require("kableExtra")}
+tdist <- read_csv("tokendist.csv", col_types = cols()) %>% 
+  select(token, everything()) %>% 
+  mutate_if(is.numeric, ~1-.x) %>% 
+  mutate_if(is.numeric, ~cell_spec(.x, color = if_else(.x == 0, "grey", "black")))
+colnames(tdist) <- c("target", tdist$token)
+kbl(tdist, escape = FALSE) %>% 
+  column_spec(1, color = colorblindr::palette_OkabeIto[1:3], bold=TRUE)
+```
+]
+
+--
+.pull-right[
+#### t-SNE visualization
+.halfsize[
+![t-SNE simulation](gifs/bubbles-cropped.gif)
+]
+]
+
+---
+class: center
+
+# In short
+
+.ba.br3.bw1.shadow-3.b--dark-green.bg-washed-green[
+We represent a word
+
+.small[(one occurrence, or all the occurrences)]
+
+with its (textual) context.
+]
+
+--
+
+# BUT
+
+### How do you define the "context"?
+
+---
+class: center
+
+# Parameter settings
+
+.pull-left[
+### First order
+
+`r fontawesome("arrow-alt-circle-down")`
+
+The context of each token
+
+.panelset[
+
+  .panel[.panel-name[i]
+  Would you like to **study** *linguistics*? It's so cool!
+  ]
+  
+  .panel[.panel-name[ii]
+  Would you *like* to **study** *linguistics*? It's so *cool*!
+  ]
+  
+  .panel[.panel-name[iii]
+  *Would* you *like* to **study** linguistics? It'*s* so cool!
+  ]
+  
+  .panel[.panel-name[iv]
+  *Would you like to* **study** *linguistics*? It's so cool!
+  ]
+  
+  .panel[.panel-name[...]
+  ~~Would you like to **study** linguistics? It's so cool!~~
+  ]
+]
+
+]
+
+--
+.pull-right[
+### Second order
+
+`r fontawesome("arrow-alt-circle-down")`
+
+The context of the context
+
+.panelset[
+
+  .panel[.panel-name[i]
+  *PMI window: 10; all words*
+  
+```{r, echo=FALSE}
+kbl(vex, escape=FALSE) %>% 
+  kable_styling(font_size = 9)
+```
+
+  ]
+  
+  .panel[.panel-name[ii]
+  *PMI window: 10; no adjectives*
+  
+```{r, echo=FALSE}
+kbl(select(vex, -ends_with("j")), escape=FALSE) %>% 
+  kable_styling(font_size = 9)
+```
+
+  ]
+  
+  .panel[.panel-name[iii]
+  *PMI window: 4; all words*
+  
+```{r, echo=FALSE}
+# This one is with a window size of 4 instead of 10 (I think)
+read_csv("vectorexample2.csv", col_types = cols()) %>%
+  select(target, `language/n`, `word/n`, `english/j`, `speak/v`, everything()) %>% 
+  mutate_if(is.numeric, round, 2) %>% 
+  kbl(escape=FALSE) %>% 
+  kable_styling(font_size = 9)
+```
+  ]
+  
+  .panel[.panel-name[iv]
+  *PMI window:10; same columns as rows*
+  
+```{r, echo=FALSE}
+# Again window size of 10 but same cols as rows
+vexFoc <- read_csv("vectorexample3.csv", col_types = cols()) %>% 
+  filter(target != "lexicography/n")
+select(vexFoc, target, vexFoc$target) %>% 
+  mutate_if(is.numeric, round, 2) %>% 
+  kbl(escape=FALSE) %>% 
+  kable_styling(font_size = 9)
+```
+  ]
+]
+]
+
+---
+class: center
+
+.pull-left[
+### First order
+```{r, echo=FALSE, eval=require("kableExtra")}
+DiagrammeR::grViz("context.gv")
+```
+]
+--
+
+.pull-right[
+### Second order
+```{r, echo=FALSE, eval=require("kableExtra")}
+DiagrammeR::grViz("socontext.gv")
+```
+]
+
+---
+
+# Outline
+
+```{r, echo = FALSE, results="asis"}
+printOutline(outline, 3)
+```
+
+---
+
 ## 32 Dutch nouns, verbs and adjectives
+
+<br>
+
+```{r, echo=FALSE, eval=require("kableExtra")}
+joinList <- function(x) paste0(x, collapse = "<br>")
+tibble(
+  nouns = joinList(c("blik", "hoop", "horde", "schaal", "spot", "staal", "stof")),
+  verbs1 = joinList(c("diskwalificeren", "haken", "harden", "haten", "heffen", "helpen")),
+  verbs2 = joinList(c("herhalen", "herinneren", "herroepen", "herstellen", "herstructureren", "huldigen")),
+  adjs1 = joinList(c("dof", "geestig", "gekleurd", "geldig", "gemeen", "goedkoop", "grijs")),
+  adjs2 = joinList(c("hachelijk", "heet", "heilzaam", "hemels", "hoekig", "hoopvol"))
+) %>% 
+  kable(escape = FALSE, col.names = NULL) %>% 
+  add_header_above(
+    c("7 nouns", "12 verbs" = 2, "13 adjectives" = 2)
+  )
+
+```
 
 ---
 
 # Semantic annotation
 
-- Assign a sense from a simplified set
+1. Assign a sense from a simplified set
 
-- If no sense could be assigned, explain why
+1. If no sense could be assigned, explain why
 
-- Indicate which context words helped the decision
+1. Indicate which context words helped the decision
+
+
+.halfsize.shadow-5.center [
+![annotation example](gifs/annotation.gif)
+]
 
 ---
 
-# How do we use the visualization tool?
+# Outline
+
+```{r, echo = FALSE, results="asis"}
+printOutline(outline, 4)
+```
 
 ---
 
-# Why should you care?
+# Visualization tool
 
-(results?)
+- Written in Javascript with [`r ci$d3`](https://d3js.org/) (and other libraries)
+
+- Originally designed by [Thomas Wielfaert](http://tokenclouds.github.io/LeTok/)
+
+- Further developed by [me](https://github.com/montesmariana/NephoVis)
+
+- Three levels of scatterplots to examine and compare models
+
+<br>
+
+.center[
+*Not really ready for deployment yet, but you can [play](https://montesmariana.github.io/NephoVis/)!*
+]
+
+---
+
+# [Visualization tool](https://montesmariana.github.io/NephoVis/level1.html?type=hachelijk)
+
+![nephovis example](img/nephovis.png)
+
+---
+
+# Outline
+
+```{r, echo = FALSE, results="asis"}
+printOutline(outline, 5)
+```
+
+---
+
+## Best models?
+
+.panelset[
+
+.panel[.panel-name[Best 'hoop' model]
+  .pull-left[
+  .center[**hoop** 'hope, heap']
+  ![best model for *hoop*](img/hoop3good.png)
+  ]
+
+  .pull-right[
+  .center[**stof** 'substance, fabric, dust']
+  ![best parameters of *hoop* on *stof*](img/stof3bad.png)
+  ]
+
+]
+
+.panel[.panel-name[Best 'stof' model]
+  .pull-left[
+  .center[**hoop** 'hope, heap']
+  ![best model for *hoop*](img/hoop3bad.png)
+  ]
+
+  .pull-right[
+  .center[**stof** 'substance, fabric, dust']
+  ![best parameters of *hoop* on *stof*](img/stof3good.png)
+  ]
+
+]
+
+.panel[.panel-name[Range]
+.pull-left[
+.center[**Hoop** 'hope, heap']
+![*hoop* medoids](img/hoop2.png)
+]
+
+.pull-right[
+.center[**Schaal** 'scale, dish']
+![*schaal* medoids](img/schaal2.png)
+]
+]
+
+]
+
+--
+
+???
+
+Best *hoop* : LEMMAPATHweight.PPMIno.LENGTHFOC.SOCPOSall
+
+Best *stof* : BOWbound5lex.PPMIselection.LENGTHFOC.SOCPOSall
+
+---
+
+### What parameters make the most difference?
+
+.pull-left[
+.center[**Hachelijk** 'dangerous, critical']
+![level 1 of *hachelijk*](img/hachelijk1.png)
+]
+
+.pull-right[
+.center[**Geldig** 'valid']
+![level 1 of *geldig*](img/geldig1.png)
+]
+
+
+.footnote[Color: Part of speech filters (**![:color 0](Dependencies), ![:color 2](Nouns, adjectives, verbs, adverbs), ![:color 1](No filter)**)]
+
+---
+
+# Outline
+
+```{r, echo = FALSE, results="asis"}
+printOutline(outline, 6)
+```
+
+---
+
+# Discussion
+
+- No set of parameters identifies "senses" reliably (~~best model~~).
+
+    - Discrete senses are an abstraction and don't exist in the wild.
+--
+
+- Vector space models identify collocational patterns.
+
+    - Are there strong, recurrent patterns?
+    - Are they very different from each other?
+    - Are they driven by more lexical or syntactic items?
+
 
 ---
 class: inverse, center, middle

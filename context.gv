@@ -1,0 +1,28 @@
+digraph {
+  
+  graph [layout = dot]
+  
+  node [
+    shape = rectangle,
+    color = darkgreen,
+    fontname = Helvetica
+    ]
+    
+  a [label = "Syntactic information?"]
+  b [label = "Window size?"]
+  b2 [label = "Part of speech filter?"]
+  c [label = "How far in the tree?"]
+  c2 [label = "Which kind of pattern?"]
+  d [label = "Filter by association strength?"]
+  
+  edge [
+    color = darkgreen,
+    fontname = Helvetica
+    ]
+  a -> b [label = "no"]
+  b -> b2
+  a -> c [label = "yes"]
+  c -> c2 [arrowhead = none, label = "or"]
+  b2 -> d
+  c2 -> d
+}

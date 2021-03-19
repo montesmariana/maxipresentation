@@ -1,6 +1,25 @@
 .whitebox {
-  background-color : white;
+  background-color : var(--white);
   padding: 2px;
   width: auto;
   border-radius: 25px;
+}
+
+.halfsize {
+  width : 80%;
+}
+
+.withshadow {
+  box-shadow:
+    0.3em 0.3em 1em rgba(0,0,0,0.3);
+  margin: 1rem;
+}
+
+.rotated{
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+}
+
+ul > li {
+  list-style-image: url(icons/cloud-green.png);
 }

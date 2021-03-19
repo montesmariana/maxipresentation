@@ -1,0 +1,29 @@
+digraph {
+  
+  graph [layout = dot]
+  
+  node [
+    shape = rectangle,
+    color = darkgreen,
+    fontname = Helvetica
+    ]
+    
+  d [
+    label = "First order filters",
+    shape = plaintext
+    ]
+  e [label = "Weight vectors?"]
+  f [label = "Filter by part-of-speech?"]
+  g [label = "How many dimensions?"]
+  h [label = "..."]
+  
+  edge [
+    color = darkgreen,
+    fontname = Helvetica
+    ]
+  d -> e
+  e -> f
+  f -> g
+  g -> h
+  
+}
