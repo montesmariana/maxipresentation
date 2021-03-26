@@ -67,6 +67,7 @@ use_logo(
   link_url = "https://www.arts.kuleuven.be/ling/qlvl/projects/current/nephological-semantics"
 )
 use_tachyons()
+use_share_again()
 ```
 
 # Outline
