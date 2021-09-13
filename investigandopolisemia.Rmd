@@ -14,7 +14,7 @@ output:
       countIncrementalSlides: false
       beforeInit: "myjs.js"
       ratio: 16:9
-    css: [xaringan-themer.css, custom-blue.css]
+    css: [xaringan-themer-blue.css, custom-blue.css]
 ---
 
 class: title-slide
@@ -40,7 +40,8 @@ style_mono_accent(
   ),
   title_slide_background_image = "img/cover.png",
   title_slide_background_color = "#FFFFFF",
-  title_slide_text_color = "#0266a0ff"
+  title_slide_text_color = "#0266a0ff",
+  outfile = 'xaringan-themer-blue.css'
   )
 down_arrow <- icon_style(fontawesome("angle-double-down"), fill = "#0266a0")
 ci <- icon_set("icons")

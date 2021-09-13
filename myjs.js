@@ -8,3 +8,7 @@ remark.macros.color = function (hex) {
   return '<span style="color:' + hex + '">' + text + "</span>";
   };
   
+remark.macros.img = function (percentage, alt) {
+  var url = this;
+  return `<img src="${url}" style ="width:${percentage};" alt="${alt}"/>`;
+};
