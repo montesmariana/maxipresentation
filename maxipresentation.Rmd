@@ -80,7 +80,7 @@ meta() %>%
       "Visual analytics for distributional semantics.",
       "Seminar on PhD project at KU Leuven, March 2021."
     ),
-    url = "https://montesmariana.github.io/maxipresentation",
+    url = "https://montesmariana.github.io/maxipresentation/maxipresentation.html",
     image = "https://montesmariana.github.io/maxipresentation/social-card.png",
     image_alt = paste(
       "Title slide of Cloud spotting:", 
@@ -190,7 +190,7 @@ name: vsm-intro
 .center[**word vectors** &rarr; numerical representations of words]
 
 ```{r echo=FALSE}
-vex <- read_csv("vectorexample.csv", col_types = cols()) %>%
+vex <- read_csv("data/vectorexample.csv", show_col_types = F) %>%
   select(target, `language/n`, `word/n`, `english/j`, `speak/v`, everything()) %>% 
   mutate_if(is.numeric, round, 2)
 
@@ -342,7 +342,7 @@ kbl(s2, escape=FALSE)
 
 .center[
 ```{r, echo=FALSE, eval=require("kableExtra")}
-read_csv("tokensexample.csv", col_types = cols()) %>%
+read_csv("data/tokensexample.csv", show_col_types = F) %>%
   kbl(escape = FALSE) %>% 
   column_spec(1, color = colorblindr::palette_OkabeIto[1:3], bold=TRUE)
 ```
@@ -367,7 +367,7 @@ read_csv("tokensexample.csv", col_types = cols()) %>%
 #### Token-context matrix
 
 ```{r, echo=FALSE, eval=require("kableExtra")}
-read_csv("tokensexample.csv", col_types = cols()) %>%
+read_csv("data/tokensexample.csv", show_col_types = F) %>%
   kbl(escape = FALSE) %>% 
   kable_styling(font_size = 11) %>% 
   column_spec(1, color = colorblindr::palette_OkabeIto[1:3], bold=TRUE)
@@ -381,7 +381,7 @@ read_csv("tokensexample.csv", col_types = cols()) %>%
 
 #### Token-token distance matrix
 ```{r, echo=FALSE, eval=require("kableExtra")}
-tdist <- read_csv("tokendist.csv", col_types = cols()) %>% 
+tdist <- read_csv("data/tokendist.csv", show_col_types = F) %>% 
   select(token, everything()) %>% 
   mutate_if(is.numeric, ~1-.x) %>% 
   mutate_if(is.numeric, ~cell_spec(.x, color = if_else(.x == 0, "grey", "black")))
@@ -491,7 +491,7 @@ kbl(select(vex, -ends_with("j")), escape=FALSE) %>%
   
 ```{r, echo=FALSE}
 # This one is with a window size of 4 instead of 10 (I think)
-read_csv("vectorexample2.csv", col_types = cols()) %>%
+read_csv("data/vectorexample2.csv", show_col_types = F) %>%
   select(target, `language/n`, `word/n`, `english/j`, `speak/v`, everything()) %>% 
   mutate_if(is.numeric, round, 2) %>% 
   kbl(escape=FALSE) %>% 
@@ -504,7 +504,7 @@ read_csv("vectorexample2.csv", col_types = cols()) %>%
   
 ```{r, echo=FALSE}
 # Again window size of 10 but same cols as rows
-vexFoc <- read_csv("vectorexample3.csv", col_types = cols()) %>% 
+vexFoc <- read_csv("data/vectorexample3.csv", show_col_types = F) %>% 
   filter(target != "lexicography/n")
 select(vexFoc, target, vexFoc$target) %>% 
   mutate_if(is.numeric, round, 2) %>% 
@@ -521,7 +521,7 @@ class: center
 .pull-left[
 ### First order
 ```{r, echo=FALSE, eval=require("kableExtra")}
-DiagrammeR::grViz("context.gv")
+DiagrammeR::grViz("data/context.gv")
 ```
 ]
 --
@@ -529,7 +529,7 @@ DiagrammeR::grViz("context.gv")
 .pull-right[
 ### Second order
 ```{r, echo=FALSE, eval=require("kableExtra")}
-DiagrammeR::grViz("socontext.gv")
+DiagrammeR::grViz("data/socontext.gv")
 ```
 ]
 
@@ -594,19 +594,19 @@ printOutline(outline, 4)
 
 - Originally designed by [Thomas Wielfaert](http://tokenclouds.github.io/LeTok/)
 
-- Further developed by [me](https://github.com/montesmariana/NephoVis)
+- Further developed by [me](https://github.com/qlvl/NephoVis)
 
 - Three levels of scatterplots to examine and compare models
 
 <br>
 
 .center[
-*Not really ready for deployment yet, but you can [play](https://montesmariana.github.io/NephoVis/)!*
+*Not really ready for deployment yet, but you can [play](https://qlvl.github.io/NephoVis/)!*
 ]
 
 ---
 
-# [Visualization tool](https://montesmariana.github.io/NephoVis/level1.html?type=hachelijk)
+# [Visualization tool](https://qlvl.github.io/NephoVis/level1.html?type=hachelijk)
 
 ![nephovis example](img/nephovis.png)
 
@@ -759,5 +759,5 @@ class: inverse, center, middle
 
 [mariana.montes@kuleuven.be](mailto:mariana.montes@kuleuven.be)
 
-`r icon_style(fontawesome("cloud-meatball"), fill="#03763d")` [https://montesmariana.github.io/NephoVis/](https://montesmariana.github.io/NephoVis/)
+`r icon_style(fontawesome("cloud-meatball"), fill="#03763d")` [https://qlvl.github.io/NephoVis/](https://qlvl.github.io/NephoVis/)
 ]

@@ -251,7 +251,7 @@ name: vsm-intro
 .center[**vector** &rarr; lista de números]
 
 ```{r echo=FALSE}
-vex <- read_delim("ejemplovectores.csv", delim = ";", locale = locale(decimal_mark = ",")) %>% 
+vex <- read_delim("data/ejemplovectores.csv", delim = ";", locale = locale(decimal_mark = ",")) %>% 
   mutate_if(is.numeric, round, 2)
 
 kable(slice(vex, 1), format.args = list(decimal.mark = ','))
@@ -396,7 +396,7 @@ kbl(s2, escape=FALSE, format.args = list(decimal.mark = ','))
 
 .center[
 ```{r, echo=FALSE, eval=require("kableExtra")}
-tokvecs <- read_delim("ejemplotokens.csv", delim = ";", locale = locale(decimal_mark = ","))
+tokvecs <- read_delim("data/ejemplotokens.csv", delim = ";", locale = locale(decimal_mark = ","))
 tokvecs %>%
   kbl(escape = FALSE, format.args = list(decimal.mark = ',')) %>% 
   column_spec(1, color = colorblindr::palette_OkabeIto[1:3], bold=TRUE)
@@ -467,7 +467,7 @@ tokvecs %>% kable_styling(font_size = 14)
 
 ```{r, echo=FALSE, eval=require("kableExtra")}
 reformat <- function(x) if (x == 0) '0' else format(x, decimal.mark = ',', digits = 3)
-tdist <- read_delim("tokendist_es.csv", delim=";",
+tdist <- read_delim("data/tokendist_es.csv", delim=";",
                   locale = locale(decimal_mark = ",")) %>% 
   select(token, everything()) %>% 
   mutate(across(where(is.numeric), ~round(1-.x, 3))) %>% 
