@@ -14,7 +14,7 @@ output:
       countIncrementalSlides: false
       beforeInit: "myjs.js"
       ratio: 16:9
-    css: [xaringan-themer.css, custom-blue.css]
+    css: [xaringan-themer-blue.css, custom-blue.css]
 ---
 
 class: title-slide
