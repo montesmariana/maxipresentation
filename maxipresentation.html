@@ -89,9 +89,6 @@ top:1em;right:1em;
 </div>
 
 
-```
-## Warning: package 'metathis' was built under R version 4.1.1
-```
 
 # Outline
 
@@ -986,15 +983,15 @@ class: center
 
 .pull-left[
 ### First order
-<div id="htmlwidget-bfc2425ad4b8ffce0c8c" style="width:504px;height:504px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-bfc2425ad4b8ffce0c8c">{"x":{"diagram":"digraph {\n  \n  graph [layout = dot]\n  \n  node [\n    shape = rectangle,\n    color = darkgreen,\n    fontname = Helvetica\n    ]\n    \n  a [label = \"Syntactic information?\"]\n  c [label = \"Number of steps\"]\n  c2 [label = \"Kind of patterns\"]\n  d [label = \"Filter by association strength?\"]\n  b [label = \"Window size\"]\n  b2 [label = \"PoS filter\"]\n  \n  edge [\n    color = darkgreen,\n    fontname = Helvetica\n    ]\n  a -> b [label = \"no\"]\n  b -> b2\n  a -> c [label = \"yes\"]\n  c -> c2 [arrowhead = none, label = \"or\"]\n  b2 -> d\n  c2 -> d\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-03b78e9a8bc2dcaa2c17" style="width:504px;height:504px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-03b78e9a8bc2dcaa2c17">{"x":{"diagram":"digraph {\n  \n  graph [layout = dot]\n  \n  node [\n    shape = rectangle,\n    color = darkgreen,\n    fontname = Helvetica\n    ]\n    \n  a [label = \"Syntactic information?\"]\n  c [label = \"Number of steps\"]\n  c2 [label = \"Kind of patterns\"]\n  d [label = \"Filter by association strength?\"]\n  b [label = \"Window size\"]\n  b2 [label = \"PoS filter\"]\n  \n  edge [\n    color = darkgreen,\n    fontname = Helvetica\n    ]\n  a -> b [label = \"no\"]\n  b -> b2\n  a -> c [label = \"yes\"]\n  c -> c2 [arrowhead = none, label = \"or\"]\n  b2 -> d\n  c2 -> d\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 --
 
 .pull-right[
 ### Second order
-<div id="htmlwidget-d9f42a5510780c69333d" style="width:504px;height:504px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d9f42a5510780c69333d">{"x":{"diagram":"digraph {\n  \n  graph [layout = dot]\n  \n  node [\n    shape = rectangle,\n    color = darkgreen,\n    fontname = Helvetica\n    ]\n    \n  d [\n    label = \"First order filters\",\n    shape = plaintext\n    ]\n  e [label = \"Weight vectors?\"]\n  f [label = \"PoS filter\"]\n  g [label = \"Length\"]\n  h [label = \"...\"]\n  \n  edge [\n    color = darkgreen,\n    fontname = Helvetica\n    ]\n  d -> e\n  e -> f\n  f -> g\n  g -> h\n  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a66181cd8021219b8e79" style="width:504px;height:504px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a66181cd8021219b8e79">{"x":{"diagram":"digraph {\n  \n  graph [layout = dot]\n  \n  node [\n    shape = rectangle,\n    color = darkgreen,\n    fontname = Helvetica\n    ]\n    \n  d [\n    label = \"First order filters\",\n    shape = plaintext\n    ]\n  e [label = \"Weight vectors?\"]\n  f [label = \"PoS filter\"]\n  g [label = \"Length\"]\n  h [label = \"...\"]\n  \n  edge [\n    color = darkgreen,\n    fontname = Helvetica\n    ]\n  d -> e\n  e -> f\n  f -> g\n  g -> h\n  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 
 ---

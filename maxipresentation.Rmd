@@ -57,7 +57,7 @@ printOutline <- function(outline, highlight = double()) {
 }
 ```
 
-```{r xaringanExtra, eval=require("xaringanExtra"), echo=FALSE}
+```{r xaringanExtra, eval=require("xaringanExtra"), echo=FALSE, warning=FALSE}
 library(xaringanExtra)
 use_panelset()
 #use_animate_css()
@@ -70,7 +70,7 @@ use_tachyons()
 use_share_again()
 ```
 
-```{r metathis, echo=FALSE}
+```{r metathis, echo=FALSE, warning=FALSE}
 library(metathis)
 meta() %>%
   meta_name("github-repo" = "montesmariana/maxipresentation") %>% 
