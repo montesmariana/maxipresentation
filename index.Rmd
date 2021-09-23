@@ -70,6 +70,30 @@ use_tachyons()
 use_share_again()
 ```
 
+```{r metathis, echo=FALSE}
+library(metathis)
+meta() %>%
+  meta_name("github-repo" = "montesmariana/maxipresentation") %>% 
+  meta_social(
+    title = "Cloud spotting",
+    description = paste(
+      "Visual analytics for distributional semantics.",
+      "Seminar on PhD project at KU Leuven, March 2021."
+    ),
+    url = "https://montesmariana.github.io/maxipresentation",
+    image = "https://montesmariana.github.io/maxipresentation/social-card.png",
+    image_alt = paste(
+      "Title slide of Cloud spotting:", 
+      "Visual analytics for distributional semantics.", 
+      "Seminar on PhD project at KU Leuven, March 2021, by Mariana Montes."
+    ),
+    og_type = "website",
+    og_author = "Mariana Montes",
+    twitter_card_type = "summary_large_image",
+    twitter_creator = "@roblerobusto"
+  )
+```
+
 # Outline
 
 ```{r, echo = FALSE, results="asis"}
@@ -120,7 +144,7 @@ printOutline(outline, 1)
 Understand and develop tools for distributional semantics
 - `r simple_icons("python")` Python module to create count-based token-level vector space models
 
-- `r simple_icons("d3-dot-js")` Visualization tool for exploration 
+- `r simple_icons("d3dotjs")` Visualization tool for exploration 
 
 - Case studies, code and manual to make the most of our data: `r simple_icons("python")` + `r simple_icons("r")` + `r simple_icons("javascript")`
 
