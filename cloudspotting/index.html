@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Cloudspotting</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Mariana Montes" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link href="libs/tachyons/tachyons.min.css" rel="stylesheet" />
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/shareon/shareon.min.css" rel="stylesheet" />
+    <script src="libs/shareon/shareon.min.js"></script>
+    <link href="libs/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-shareagain/shareagain.js"></script>
+    <link href="libs/animate.css/animate.xaringan.css" rel="stylesheet" />
+    <meta name="github-repo" content="montesmariana/maxipresentation"/>
+    <meta name="twitter:title" content="Cloudspotting. Visual Analytics for Distributional Semantics"/>
+    <meta name="twitter:description" content="Public doctoral defense, 21 September 2021"/>
+    <meta name="twitter:url" content="https://montesmariana.github.io/maxipresentation/cloudspotting/"/>
+    <meta name="twitter:image" content="https://montesmariana.github.io/maxipresentation/cloudspotting/social-card.png"/>
+    <meta name="twitter:image:alt" content="Cloudspotting: Visual Analytics for Distributional Semantics Doctoral defense, Mariana Montes."/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:creator" content="@roblerobusto"/>
+    <meta name="twitter:site" content="@roblerobusto"/>
+    <meta property="og:title" content="Cloudspotting. Visual Analytics for Distributional Semantics"/>
+    <meta property="og:description" content="Public doctoral defense, 21 September 2021"/>
+    <meta property="og:url" content="https://montesmariana.github.io/maxipresentation/cloudspotting/"/>
+    <meta property="og:image" content="https://montesmariana.github.io/maxipresentation/cloudspotting/social-card.png"/>
+    <meta property="og:image:alt" content="Cloudspotting: Visual Analytics for Distributional Semantics Doctoral defense, Mariana Montes."/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="article:author" content="Mariana Montes"/>
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: title-slide
+
+
+
+<div>
+<style type="text/css">.xaringan-extra-logo {
+width: 90px;
+height: 128px;
+z-index: 0;
+background-image: url(../icons/cloud-qlvl-blue.png);
+background-size: contain;
+background-repeat: no-repeat;
+position: absolute;
+top:1em;right:1em;
+}
+</style>
+<script>(function () {
+  let tries = 0
+  function addLogo () {
+    if (typeof slideshow === 'undefined') {
+      tries += 1
+      if (tries < 10) {
+        setTimeout(addLogo, 100)
+      }
+    } else {
+      document.querySelectorAll('.remark-slide-content:not(.title-slide):not(.inverse):not(.hide_logo)')
+        .forEach(function (slide) {
+          const logo = document.createElement('a')
+          logo.classList = 'xaringan-extra-logo'
+          logo.href = 'https://www.arts.kuleuven.be/ling/qlvl/projects/current/nephological-semantics'
+          slide.appendChild(logo)
+        })
+    }
+  }
+  document.addEventListener('DOMContentLoaded', addLogo)
+})()</script>
+</div>
+
+
+
+.measure.mytitle[
+# Cloudspotting
+
+## Visual Analytics for Distributional Semantics
+
+**Mariana Montes**
+
+![kuleuven icon](../icons/kuleuven.png) 
+
+]
+
+---
+layout: true
+
+.date-footnote[Leuven, 21/09/2021]
+
+---
+
+# Outline
+
+-  What for? 
+
+-  Distributional Semantics 
+
+-  Visual Analytics 
+
+-  Insights 
+
+---
+
+# Outline
+
+-  **What for?** 
+
+-  Distributional Semantics 
+
+-  Visual Analytics 
+
+-  Insights 
+
+---
+
+# Introduction
+
+.bg-lightest-blue.b--dark-blue.ba.bw2.br3.shadow-5.center[
+Using distributional semantics for semasiological research
+]
+&lt;br&gt;
+--
+
+.fl.w-third.center.ph2.pv2[
+![Photo of dictionary page, by Joshua Hoehne on Unsplash](img/dictionary.jpg)
+]
+
+--
+
+.fl.w-third.center.ph2.pv2[
+![Photo of someone writing, by Kat Stokes on Unsplash](img/writing.jpg)
+]
+
+--
+
+.fl.w-third.center.ph2.pv2[
+
+![Fragment of concordance](img/text.png)
+
+]
+
+
+???
+
+Image credits.
+Dictionary foto: Joshua Hoehne on Unsplash (https://unsplash.com/@mrthetrain)
+
+Writing foto: Kat Stokes on Unsplash (https://unsplash.com/@katstokes_)
+
+---
+class: hide_logo
+
+.fl.w-third.ph1[
+![Fragment of concordance](img/text_001.png)
+]
+--
+.fl.w-third.ph1[
+![Fragment of concordance](img/text_002.png)
+]
+--
+.fl.w-third.ph1[
+![Fragment of concordance](img/text_003.png)
+]
+
+---
+
+.fl.w-40.ph3[
+![Fragments of concordance](img/pages.png)
+]
+
+.fl.w-10.p3[
+&lt;br&gt;
+
+&lt;br&gt;
+
+&lt;br&gt;
+
+![:img 100%, Right arrow.](img/arrow.png)
+]
+
+.fl.w-50[
+
+![Plot of horde.](img/horde1.png)]
+
+---
+
+
+.center[
+
+
+![:img 80%, Plot of horde with context.](img/highlight_nemen2.png)
+]
+
+---
+
+# Outline
+
+-  .gray[What for?] 
+
+-  **Distributional Semantics** 
+
+-  Visual Analytics 
+
+-  Insights 
+
+---
+
+## Distributional Hypothesis
+
+.bg-dark-blue.b--dark-blue.ba.bw2.br3.shadow-5.mh5.center.white[
+Words with similar distribution are semantically similar.
+]
+
+&lt;br&gt;
+
+**Similar distribution**: attested (with similar frequency) in similar circumstances.
+
+Can we use frequency information to represent semantic relationships?
+
+---
+
+name: vsm-intro
+
+## What are vector space models?
+
+.center[**word vectors** &amp;rarr; numerical representations of words]
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; target &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; language/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; word/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; english/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; speak/v &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; flemish/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; eat/v &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; linguistics/n &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+
+&lt;br&gt; 
+
+`$$PMI_{(\mathrm{linguistics}, \mathrm{language})} = \log\frac{p(\mathrm{linguistics}, \mathrm{language})}{p(\mathrm{linguistics})p(\mathrm{language})}$$`
+
+.footnote[
+&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"&gt;&lt;/path&gt;&lt;/svg&gt;
+Actual values from GloWbE (Global Web-based English corpus), with a window-span of 10 words to either side.
+
+PMI: [Pointwise Mutual information](https://en.wikipedia.org/wiki/Pointwise_mutual_information)]
+
+---
+template: vsm-intro
+
+&lt;br&gt;
+
+`$$PMI_{(\mathrm{linguistics}, \mathrm{language})} = \log\frac{285/N}{\frac{20,740}{N}\frac{1.58 \times 10^6}{N}}$$`
+---
+
+template: vsm-intro
+
+&lt;br&gt;
+
+`$$PMI_{(\mathrm{linguistics}, \mathrm{language})} = \log\frac{285}{20,740\times 1.58 \times 10^6}9.14 \times 10^8 = 4.37$$`
+---
+name: type-level
+
+## Type level vectors
+
+- Each row is the vector of a word
+   - aggregating over all its occurrences
+
+- Each column is a context feature
+
+---
+template: type-level
+
+- Values are PMI
+
+  
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; target &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; language/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; word/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; english/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; speak/v &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; flemish/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; eat/v &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; linguistics/n &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; lexicography/n &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.51 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.09 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; computational/j &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.80 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; research/n &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.84 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.50 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.38 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.68 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; chocolate/n &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.72 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.53 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.73 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.13 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.28 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.08 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+template: type-level
+
+- Values are **P**PMI: negative values turned to 0.
+
+
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; target &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; language/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; word/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; english/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; speak/v &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; flemish/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; eat/v &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; linguistics/n &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; lexicography/n &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.51 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.09 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; computational/j &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; research/n &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; chocolate/n &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.28 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.08 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+name: study-tokens
+
+## Token level vectors
+
+### Tokens of *to study*
+
+(1) Would you like to **study** linguistics?
+
+(2) They **study** this in computational linguistics too.
+
+(3) I eat chocolate while I **study**.
+
+&lt;hr&gt;
+
+--
+
+.center[(1) Would you like to **study** *linguistics*?]
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; context feature &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; language/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; word/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; english/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; speak/v &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; flemish/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; eat/v &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; linguistics/n &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+template: study-tokens
+
+.center[(2) They **study** this in *computational linguistics* too.]
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; context feature &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; language/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; word/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; english/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; speak/v &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; flemish/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; eat/v &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; linguistics/n &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; computational/j &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+### Merging vectors
+
+.center[(2) They **study** this in *computational linguistics* too.]
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; context feature &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; language/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; word/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; english/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; speak/v &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; flemish/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; eat/v &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; linguistics/n &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; computational/j &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+&lt;br&gt;
+
+.center[
+&lt;svg viewBox="0 0 320 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M143 256.3L7 120.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0L313 86.3c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.4 9.5-24.6 9.5-34 .1zm34 192l136-136c9.4-9.4 9.4-24.6 0-33.9l-22.6-22.6c-9.4-9.4-24.6-9.4-33.9 0L160 352.1l-96.4-96.4c-9.4-9.4-24.6-9.4-33.9 0L7 278.3c-9.4 9.4-9.4 24.6 0 33.9l136 136c9.4 9.5 24.6 9.5 34 .1z"&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;svg viewBox="0 0 320 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M143 256.3L7 120.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0L313 86.3c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.4 9.5-24.6 9.5-34 .1zm34 192l136-136c9.4-9.4 9.4-24.6 0-33.9l-22.6-22.6c-9.4-9.4-24.6-9.4-33.9 0L160 352.1l-96.4-96.4c-9.4-9.4-24.6-9.4-33.9 0L7 278.3c-9.4 9.4-9.4 24.6 0 33.9l136 136c9.4 9.5 24.6 9.5 34 .1z"&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;svg viewBox="0 0 320 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M143 256.3L7 120.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0L313 86.3c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.4 9.5-24.6 9.5-34 .1zm34 192l136-136c9.4-9.4 9.4-24.6 0-33.9l-22.6-22.6c-9.4-9.4-24.6-9.4-33.9 0L160 352.1l-96.4-96.4c-9.4-9.4-24.6-9.4-33.9 0L7 278.3c-9.4 9.4-9.4 24.6 0 33.9l136 136c9.4 9.5 24.6 9.5 34 .1z"&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;svg viewBox="0 0 320 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M143 256.3L7 120.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0L313 86.3c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.4 9.5-24.6 9.5-34 .1zm34 192l136-136c9.4-9.4 9.4-24.6 0-33.9l-22.6-22.6c-9.4-9.4-24.6-9.4-33.9 0L160 352.1l-96.4-96.4c-9.4-9.4-24.6-9.4-33.9 0L7 278.3c-9.4 9.4-9.4 24.6 0 33.9l136 136c9.4 9.5 24.6 9.5 34 .1z"&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;svg viewBox="0 0 320 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M143 256.3L7 120.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0L313 86.3c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.4 9.5-24.6 9.5-34 .1zm34 192l136-136c9.4-9.4 9.4-24.6 0-33.9l-22.6-22.6c-9.4-9.4-24.6-9.4-33.9 0L160 352.1l-96.4-96.4c-9.4-9.4-24.6-9.4-33.9 0L7 278.3c-9.4 9.4-9.4 24.6 0 33.9l136 136c9.4 9.5 24.6 9.5 34 .1z"&gt;&lt;/path&gt;&lt;/svg&gt;
+]
+
+&lt;br&gt;
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; target &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; language/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; word/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; english/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; speak/v &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; flemish/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; eat/v &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; study&lt;sub&gt;2&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.97 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.07 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+### Token level vectors
+
+.center[
+.bb.b--gold.shadow-1.pv1.ph2[.gold.b[(1)] Would you like to **study** *linguistics*?]
+
+&lt;br&gt;
+.bb.b--light-blue.shadow-1.pv1.ph2[.light-blue.b[(2)] They **study** this in *computational linguistics* too.]
+
+&lt;br&gt;
+.bb.b--green.shadow-1.mt4.pv1.ph2[.green.b[(3)] I eat *chocolate* while I **study**.]
+
+]
+
+&lt;br&gt;
+
+.center[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; target &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; language/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; word/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; english/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; speak/v &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; flemish/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; eat/v &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #E69F00 !important;"&gt; study&lt;sub&gt;1&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #56B4E9 !important;"&gt; study&lt;sub&gt;2&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.97 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.07 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #009E73 !important;"&gt; study&lt;sub&gt;3&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.28 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.08 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+
+---
+
+.pull-left[
+
+#### Original text
+
+.gold.b[(1)] Would you like to **study** *linguistics*?
+
+.light-blue.b[(2)] They **study** this in *computational linguistics* too.
+
+.green.b[(3)] I eat *chocolate* while I **study**.
+
+]
+
+
+.pull-right[
+#### Token-context matrix
+
+&lt;table class="table" style="font-size: 11px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; target &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; language/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; word/n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; english/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; speak/v &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; flemish/j &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; eat/v &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #E69F00 !important;"&gt; study&lt;sub&gt;1&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #56B4E9 !important;"&gt; study&lt;sub&gt;2&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.97 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.07 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.41 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #009E73 !important;"&gt; study&lt;sub&gt;3&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.28 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.08 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+--
+
+.pull-left.dist[
+
+#### Token-token distance matrix
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; target &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; study&lt;sub&gt;1&lt;/sub&gt; &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; study&lt;sub&gt;2&lt;/sub&gt; &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; study&lt;sub&gt;3&lt;/sub&gt; &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #E69F00 !important;"&gt; study&lt;sub&gt;1&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: black !important;"&gt;0.01&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: black !important;"&gt;1&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #56B4E9 !important;"&gt; study&lt;sub&gt;2&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: black !important;"&gt;0.01&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: black !important;"&gt;1&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #009E73 !important;"&gt; study&lt;sub&gt;3&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: black !important;"&gt;1&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: black !important;"&gt;1&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+--
+.pull-right[
+#### t-SNE visualization
+![:img 60%, t-SNE simulation](../gifs/bubbles-cropped.gif)
+]
+
+---
+
+# Outline
+
+-  .gray[What for?] 
+
+-  .gray[Distributional Semantics] 
+
+-  **Visual Analytics** 
+
+-  Insights 
+
+---
+.center[
+![:img 80%, Plot of horde basic](img/horde1.png)]
+
+---
+
+.center[
+
+![:img 90%, Plot of horde with context.](img/highlight_nemen2.png)
+
+]
+
+---
+
+.center[
+
+![:img 80%, Plot of horde with context words per cluster.](img/horde-hulls.png)
+
+]
+
+---
+
+# Outline
+
+-  .gray[What for?] 
+
+-  .gray[Distributional Semantics] 
+
+-  .gray[Visual Analytics] 
+
+-  **Insights** 
+
+---
+
+# Insights
+
+- Models do represent contextual patterns.
+
+--
+
+- BUT they do not necessarily correspond to semantic phenomena.
+
+--
+
+- Their shape and strength correspond to **frequency**, **distinctiveness** and **relatedness** of the context words.
+
+--
+
+&lt;hr&gt;
+
+Can we use the models for automatic disambiguation?
+
+&gt; **No**, not reliably enough.
+The correspondence between patterns and senses varies per word.
+
+--
+
+Should we then discard distributional models altogether?
+
+&gt; **No**, they can still be informative.
+We can learn about the *structure* itself, about the patterns and their relationships.
+
+--
+
+&gt; The visualization tools will help you!
+
+
+---
+layout: false
+class: title-slide
+
+.mythanks[
+
+# Thank you!
+
+[mariana.montes@kuleuven.be](mailto:mariana.montes@kuleuven.be)
+
+&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M48 352c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm416 0c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm-119 11.1c4.6-14.5 1.6-30.8-9.8-42.3-11.5-11.5-27.8-14.4-42.3-9.9-7-13.5-20.7-23-36.9-23s-29.9 9.5-36.9 23c-14.5-4.6-30.8-1.6-42.3 9.9-11.5 11.5-14.4 27.8-9.9 42.3-13.5 7-23 20.7-23 36.9s9.5 29.9 23 36.9c-4.6 14.5-1.6 30.8 9.9 42.3 8.2 8.2 18.9 12.3 29.7 12.3 4.3 0 8.5-1.1 12.6-2.5 7 13.5 20.7 23 36.9 23s29.9-9.5 36.9-23c4.1 1.3 8.3 2.5 12.6 2.5 10.8 0 21.5-4.1 29.7-12.3 11.5-11.5 14.4-27.8 9.8-42.3 13.5-7 23-20.7 23-36.9s-9.5-29.9-23-36.9zM512 224c0-53-43-96-96-96-.6 0-1.1.2-1.6.2 1.1-5.2 1.6-10.6 1.6-16.2 0-44.2-35.8-80-80-80-24.6 0-46.3 11.3-61 28.8C256.4 24.8 219.3 0 176 0 114.1 0 64 50.1 64 112c0 7.3.8 14.3 2.1 21.2C27.8 145.8 0 181.5 0 224c0 53 43 96 96 96h43.4c3.6-8 8.4-15.4 14.8-21.8 13.5-13.5 31.5-21.1 50.8-21.3 13.5-13.2 31.7-20.9 51-20.9s37.5 7.7 51 20.9c19.3.2 37.3 7.8 50.8 21.3 6.4 6.4 11.3 13.8 14.8 21.8H416c53 0 96-43 96-96z"&gt;&lt;/path&gt;&lt;/svg&gt; [https://qlvl.github.io/NephoVis/](https://qlvl.github.io/NephoVis/)
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="../myjs.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
