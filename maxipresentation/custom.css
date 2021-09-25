@@ -1,0 +1,19 @@
+.halfsize {
+  width : 80%;
+}
+
+/* Use green cloud for all unordered lists */
+ul > li {
+  list-style-image: url(icons/cloud-green.png);
+}
+
+/* Edit color of header in distance matrix */
+.dist thead th:nth-child(2) {
+  color: #E69F00;
+}
+.dist thead th:nth-child(3) {
+  color: #56B4E9;
+}
+.dist thead th:nth-child(4) {
+  color: #009E73;
+}
