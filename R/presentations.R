@@ -4,7 +4,7 @@ library(colorblindr)
 library(ggpubr)
 library(ggforce)
 library(ggrepel)
-horde <- readRDS(here("data", "data.rds"))$horde$medoidCoords[[1]]
+horde <- readRDS(here("investigandopolisemia", "data", "data.rds"))$horde$medoidCoords[[1]]
 
 cw_translations <- c(
   'word/verb' = 'volverse',
@@ -37,7 +37,7 @@ df <- horde$coords %>%
     cluster = if_else(cluster == "0", NA_character_, as.character(cluster)),
     significado = factor(sense_mapping[sense], levels = sense_mapping))
 range_coords = c(df$model.x, df$model.y)
-ejemplos <- jsonlite::read_json('data/ejemplos.json') %>% 
+ejemplos <- jsonlite::read_json(here("investigandopolisemia", "data", "ejemplos.json")) %>% 
   map_df(as_tibble_row) %>% 
   left_join(df, by = c('id' = '_id'))
 
