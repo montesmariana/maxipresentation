@@ -1,0 +1,21 @@
+{
+    "horda": {
+        "id": "horde/noun/algemeen_dagblad_20030506_50/54",
+        "Dutch": "Hele **horden** van toeristen snellen dan toe op strandressorts, tropische regenwouden en cultuursteden.",
+        "Spanish" : "Enteras **hordas** de turistas abarrotan retiros playeros, selvas tropicales y ciudades culturales.",
+        "Plot" : "Enteras hordas de turistas abarrotan\n retiros playeros, selvas tropicales\ny ciudades culturales."
+    },
+    "obstáculo": {
+        "id": "horde/noun/de_standaard_20000713_01_97/25",
+        "Dutch": "Het internationale ruimtestation-in-aanbouw ISS heeft een belangrijke **horde** genomen.",
+        "Spanish" : "La estación espacial internacional bajo construcción, ISS, ha sorteado un **obstáculo** importante.",
+        "Plot" : "La estación espacial internacional bajo construcción,\nISS, ha sorteado un obstáculo importante."
+    },
+    "valla": {
+        "id": "horde/noun/parool_20010103_74/165",
+        "Dutch": "Charles van Commenee (werpen en meerkamp) en Marjan Olyslager (sprint en **horden**) hebben inmiddels een andere werkkring gevonden...",
+        "Spanish" : "Charles van Commenee (lanzamientos y pruebas combinadas) y Marjan Olyslager (carrera de velocidad y **vallas**) ya encontraron un nuevo ambiente de trabajo...",
+        "Plot" : "Charles van Commenee (lanzamientos y pruebas combinadas)\ny Marjan Olyslager (carrera de velocidad y vallas)\n ya encontraron un nuevo ambiente de trabajo..."
+    }
+}
+

@@ -4,7 +4,7 @@
 
 /* Use green cloud for all unordered lists */
 ul > li {
-  list-style-image: url(icons/cloud-green.png);
+  list-style-image: url(../icons/cloud-green.png);
 }
 
 /* Edit color of header in distance matrix */
