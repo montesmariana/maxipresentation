@@ -593,7 +593,7 @@ plotTest('hoop', color = 'hdbscan')
 
 ---
 
-## Exploración: Shiny App
+## Exploración: [Shiny App](https://marianamontes.shinyapps.io/Level3/)
 
 ```{r, echo=FALSE}
 knitr::include_url("https://marianamontes.shinyapps.io/Level3/", height = "480px")
@@ -609,7 +609,7 @@ class: title-slide
 
 [mariana.montes@kuleuven.be](mailto:mariana.montes@kuleuven.be)
 
-`r icon_style(fontawesome("cloud-meatball"), fill="#0266a0")` [https://qlvl.github.io/NephoVis/](https://qlvl.github.io/NephoVis/)
+`r icon_style(fontawesome("cloud-meatball"), fill="#0266a0")` [https://slides.marianamontes.me/gesel](https://slides.marianamontes.me/gesel)
 ]
 
 ---
