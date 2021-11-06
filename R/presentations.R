@@ -4,7 +4,8 @@ library(colorblindr)
 library(ggpubr)
 library(ggforce)
 library(ggrepel)
-horde <- readRDS(here("investigandopolisemia", "data", "data.rds"))$horde$medoidCoords[[1]]
+d <- readRDS(here("data", "data.rds"))
+horde <- d$horde$medoidCoords[[1]]
 
 cw_translations <- c(
   'word/verb' = 'volverse',
@@ -94,4 +95,30 @@ stylize_list <- function(max_x = max(range_coords)*3, darken_fill = 0.1) {
 #   
 
 
+plotCloud <- function(df, color = 'none'){
+  g <- df %>% 
+    mutate(cluster = if_else(cluster == '0', NA_character_, as.character(cluster))) %>% 
+    ggplot(aes(x = model.x, y = model.y))
+  g <- if (color == 'hdbscan') {
+    g + geom_point(aes(color = cluster, alpha = eps), size = 5) +
+      colorblindr::scale_color_OkabeIto(
+        darken = 0.1, use_black = TRUE, na.value = "#9b9c9f",
+        guide = 'none'
+        ) +
+      scale_alpha(range = c(1, 0), guide = 'none')
+  } else if (color == 'sense') {
+    g + geom_point(aes(color = sense), size = 2, alpha = 0.7) +
+      ggsci::scale_color_d3(guide = 'none')
+  } else {
+    g + geom_point(size = 5, alpha = 0.4)
+  }
+  g +
+    coord_fixed() +
+    theme_void()
+}
 
+testmodel <- 'BOWbound5lex.PPMIselection.LENGTHFOC.SOCPOSall'
+plotTest <- function(lemma, color = 'none') {
+  d[[lemma]]$medoidCoords[[paste0(lemma, '.', testmodel)]]$coords %>% 
+    plotCloud(color = color)
+}

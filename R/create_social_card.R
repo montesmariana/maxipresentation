@@ -9,7 +9,8 @@
 #' @param path Path to new share image
 screenshot_share_image <- function(
   slides_rmd,
-  path_image = "share-card.png"
+  path_image = "share-card.png",
+  goal = 'twitter'
 ) {
   if (!requireNamespace("webshot2", quietly = TRUE)) {
     stop(
@@ -17,15 +18,18 @@ screenshot_share_image <- function(
       'remotes::install_github("rstudio/webshot2")'
     )
   }
+  vheight <- if (goal == 'twitter') 600 else 720
+  vwidth <- if (goal == 'twitter') 1146 else 1280
+  ratio <- if (goal == 'twitter') '191:100' else '16:9'
   
   webshot2::rmdshot(
     doc = slides_rmd,
     file = path_image,
-    vheight = 600,
-    vwidth = 600 * 191 / 100,
+    vheight = vheight,
+    vwidth = vwidth,
     rmd_args = list(
       output_options = list(
-        nature = list(ratio = "191:100"),
+        nature = list(ratio = ratio),
         self_contained = TRUE
       )
     )
@@ -34,6 +38,9 @@ screenshot_share_image <- function(
   path_image
 }
 
-screenshot_share_image("cloudspotting.Rmd", "cloudspotting.png")
+screenshot_share_image("cloudspotting/index.Rmd",
+                       "cloudspotting/video-thumbnail.png",
+                       goal = 'youtube')
+screenshot_share_image("cloudspotting/index.Rmd", "cloudspotting/social-card.png")
 screenshot_share_image("investigandopolisemia.Rmd", "investigandopolisemia.png")
 screenshot_share_image("index.Rmd", "social-card.png")

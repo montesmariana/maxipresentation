@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Métodos distribucionales y visualización aplicados a la semántica léxica</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Mariana Montes" />
+    <meta name="date" content="2021-06-11" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link href="libs/tachyons/tachyons.min.css" rel="stylesheet" />
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/shareon/shareon.min.css" rel="stylesheet" />
+    <script src="libs/shareon/shareon.min.js"></script>
+    <link href="libs/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-shareagain/shareagain.js"></script>
+    <meta name="github-repo" content="montesmariana/maxipresentation"/>
+    <meta name="twitter:title" content="Métodos distribucionales y visualización aplicados a la semántica léxica"/>
+    <meta name="twitter:description" content="Presentación en el ciclo de charlas del Grupo de Estadística en Estudios del Lenguaje (UBA), via Zoom el 6 de noviembre de 2021."/>
+    <meta name="twitter:url" content="https://montesmariana.github.io/maxipresentation/gesel/"/>
+    <meta name="twitter:image" content="https://montesmariana.github.io/maxipresentation/gesel/social-card.png"/>
+    <meta name="twitter:image:alt" content="Título &#39;Métodos distribucionales y visualización aplicados a la semántica léxica&#39;, nombre y afiliciación de la autora, Mariana Montes, KU Leuven, en un fondo blanco con gráficos de puntos de varios colores alrededor. En uno de los gráficos, un grupo de puntos azules está rodeado por un círculo conectado a otro círculo más grande, como en efecto lupa, dentro del cual se ven líneas de texto, ejemplos de la palabra neerlandesa &#39;horde&#39;."/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:creator" content="@roblerobusto"/>
+    <meta name="twitter:site" content="@roblerobusto"/>
+    <meta property="og:title" content="Métodos distribucionales y visualización aplicados a la semántica léxica"/>
+    <meta property="og:description" content="Presentación en el ciclo de charlas del Grupo de Estadística en Estudios del Lenguaje (UBA), via Zoom el 6 de noviembre de 2021."/>
+    <meta property="og:url" content="https://montesmariana.github.io/maxipresentation/gesel/"/>
+    <meta property="og:image" content="https://montesmariana.github.io/maxipresentation/gesel/social-card.png"/>
+    <meta property="og:image:alt" content="Título &#39;Métodos distribucionales y visualización aplicados a la semántica léxica&#39;, nombre y afiliciación de la autora, Mariana Montes, KU Leuven, en un fondo blanco con gráficos de puntos de varios colores alrededor. En uno de los gráficos, un grupo de puntos azules está rodeado por un círculo conectado a otro círculo más grande, como en efecto lupa, dentro del cual se ven líneas de texto, ejemplos de la palabra neerlandesa &#39;horde&#39;."/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="article:author" content="Mariana Montes"/>
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: title-slide
+
+
+
+<div>
+<style type="text/css">.xaringan-extra-logo {
+width: 90px;
+height: 128px;
+z-index: 0;
+background-image: url(C:/Users/u0118974/OneDrive - KU Leuven/repos/montesmariana/slides/icons/cloud-qlvl-blue.png);
+background-size: contain;
+background-repeat: no-repeat;
+position: absolute;
+top:1em;right:1em;
+}
+</style>
+<script>(function () {
+  let tries = 0
+  function addLogo () {
+    if (typeof slideshow === 'undefined') {
+      tries += 1
+      if (tries < 10) {
+        setTimeout(addLogo, 100)
+      }
+    } else {
+      document.querySelectorAll('.remark-slide-content:not(.title-slide):not(.inverse):not(.hide_logo)')
+        .forEach(function (slide) {
+          const logo = document.createElement('a')
+          logo.classList = 'xaringan-extra-logo'
+          logo.href = 'https://www.arts.kuleuven.be/ling/qlvl/projects/current/nephological-semantics'
+          slide.appendChild(logo)
+        })
+    }
+  }
+  document.addEventListener('DOMContentLoaded', addLogo)
+})()</script>
+</div>
+
+
+
+
+
+.measure.mytitle[
+# Métodos distribucionales y visualización
+
+## aplicados a la semántica léxica
+
+**Mariana Montes**
+
+![:img 15%, KU Leuven](../icons/kuleuven-large.png) 
+
+]
+
+---
+layout: true
+
+.date-footnote[GESEL, 06/11/2021]
+
+---
+
+# Contenidos
+
+-  Introducción 
+
+-  Modelos distribucionales 
+
+-  Comparación de modelos 
+
+-  Agrupación de ocurrencias 
+
+---
+
+# Contenidos
+
+-  **Introducción** 
+
+-  Modelos distribucionales 
+
+-  Comparación de modelos 
+
+-  Agrupación de ocurrencias 
+
+---
+
+.pull-left[
+# Introducción
+
+
+- Metodología y conclusiones de mi tesis doctoral
+
+- Parte del projecto [**Semántica Nefológica**](https://www.arts.kuleuven.be/ling/qlvl/projects/current/nephological-semantics)
+
+]
+
+.pull-right[
+
+.measure-narrow.br3.shadow-5.grow[
+[!["Tapa de mi tesis doctoral"](img/front-cover.png)](https://cloudspotting.marianamontes.me)
+]
+
+]
+
+---
+
+## Herramientas utilizadas
+
+- &lt;svg role="img" viewBox="0 0 24 24" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;title&gt;&lt;/title&gt;  &lt;path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"&gt;&lt;/path&gt;&lt;/svg&gt; [Módulo de Python](https://github.com/QLVL/nephosem/) para crear espacios vectoriales
+
+- &lt;svg role="img" viewBox="0 0 24 24" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;title&gt;&lt;/title&gt;  &lt;path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"&gt;&lt;/path&gt;&lt;/svg&gt; &amp; &lt;svg role="img" viewBox="0 0 24 24" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;title&gt;&lt;/title&gt;  &lt;path d="M12 2.746c-6.627 0-12 3.599-12 8.037 0 3.897 4.144 7.144 9.64 7.88V16.26c-2.924-.915-4.925-2.755-4.925-4.877 0-3.035 4.084-5.494 9.12-5.494 5.038 0 8.757 1.683 8.757 5.494 0 1.976-.999 3.379-2.662 4.272.09.066.174.128.258.216.169.149.25.363.372.544 2.128-1.45 3.44-3.437 3.44-5.631 0-4.44-5.373-8.038-12-8.038zm-2.111 4.99v13.516l4.093-.002-.002-5.291h1.1c.225 0 .321.066.549.25.272.22.715.982.715.982l2.164 4.063 4.627-.002-2.864-4.826s-.086-.193-.265-.383a2.22 2.22 0 00-.582-.416c-.422-.214-1.149-.434-1.149-.434s3.578-.264 3.578-3.826c0-3.562-3.744-3.63-3.744-3.63zm4.127 2.93l2.478.002s1.149-.062 1.149 1.127c0 1.165-1.149 1.17-1.149 1.17h-2.478zm1.754 6.119c-.494.049-1.012.079-1.54.088v1.807a16.622 16.622 0 002.37-.473l-.471-.891s-.108-.183-.248-.394c-.039-.054-.08-.098-.111-.137z"&gt;&lt;/path&gt;&lt;/svg&gt; para procesar y analizar los datos
+
+- &lt;svg role="img" viewBox="0 0 24 24" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;title&gt;&lt;/title&gt;  &lt;path d="M13.312 12C13.312 5.718 8.22.625 1.937.625H0v5h1.938c3.521 0 6.375 2.854 6.375 6.375s-2.854 6.375-6.375 6.375H0v5h1.938c6.281 0 11.374-5.093 11.374-11.375zM24 7.563C24 3.731 20.893.625 17.062.625h-8a13.4154 13.4154 0 0 1 4.686 5h3.314c1.069 0 1.938.868 1.938 1.938 0 1.07-.869 1.938-1.938 1.938h-1.938c.313 1.652.313 3.348 0 5h1.938c1.068 0 1.938.867 1.938 1.938s-.869 1.938-1.938 1.938h-3.314a13.4154 13.4154 0 0 1-4.686 5h8c1.621 0 3.191-.568 4.438-1.605 2.943-2.45 3.346-6.824.895-9.77A6.9459 6.9459 0 0 0 24 7.563z"&gt;&lt;/path&gt;&lt;/svg&gt; &amp; Shiny para crear visualizaciones interactivas en la web:
+  - [Nephovis](https://qlvl.github.io/NephoVis/)
+  
+  - [Level 3 (Shiny app)](https://marianamontes.shinyapps.io/Level3/)
+
+
+
+---
+
+# Contenidos
+
+-  .gray[Introducción] 
+
+-  **Modelos distribucionales** 
+
+-  Comparación de modelos 
+
+-  Agrupación de ocurrencias 
+
+---
+
+## Hipótesis distribucional
+
+.measure-wide[
+- Correspondencia/correlación entre propiedades distribucionales y propiedades semánticas
+
+- "You shall know a word by the company it keeps" (Firth 1957:11)
+]
+.footnote[
+&lt;svg viewBox="0 0 448 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"&gt;&lt;/path&gt;&lt;/svg&gt; Firth (1957), Harris (1954)
+]
+
+---
+name: vsm-intro
+
+## ¿Qué es un modelo distribucional?
+
+.center[**vector** &amp;rarr; lista de números]
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; nodo &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lenguaje &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; palabra &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; español &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; hablar &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; comer &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; lingüística &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3,55 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0,53 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2,09 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0,1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+
+&lt;br&gt; 
+`$$PMI_{(\mathrm{lingüística}, \mathrm{lenguaje})} = \log\frac{p(\mathrm{lingüística},\mathrm{lenguaje})}{p(\mathrm{lingüística})p(\mathrm{lenguaje})}$$`
+
+.footnote[
+&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"&gt;&lt;/path&gt;&lt;/svg&gt;
+Valores originales del [Corpus del Español](https://www.corpusdelespanol.org/web-dial/) con una ventana simétrica de 4 palabras a cada lado.
+
+PMI: [Pointwise Mutual information](https://en.wikipedia.org/wiki/Pointwise_mutual_information)
+&lt;svg viewBox="0 0 448 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"&gt;&lt;/path&gt;&lt;/svg&gt; Church &amp; Hanks (1989)
+]
+
+---
+template: vsm-intro
+
+&lt;br&gt;
+
+`$$PMI_{(\mathrm{lingüística}, \mathrm{lenguaje})} = \log\frac{121/N}{p(\mathrm{lingüística})p(\mathrm{lenguaje})}$$`
+---
+template: vsm-intro
+
+&lt;br&gt;
+
+`$$PMI_{(\mathrm{lingüística}, \mathrm{lenguaje})} = \log\frac{121/N}{\frac{14.587}{N}\frac{171.730}{N}}$$`
+---
+
+template: vsm-intro
+
+&lt;br&gt;
+
+`$$PMI_{(\mathrm{lingüística}, \mathrm{lenguaje})} = \log\frac{121}{14.587\times 171.730} N$$`
+---
+
+template: vsm-intro
+
+&lt;br&gt;
+
+`$$PMI_{(\mathrm{lingüística}, \mathrm{lenguaje})} = \log\frac{121}{14.587\times 171.730} N = 3,55$$`
+---
+# ¿Qué es un modelo distribucional?
+
+.center[**vector** &amp;rarr; lista de números]
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; nodo &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lenguaje &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; palabra &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; español &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; hablar &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; comer &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; lingüística &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3,55 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0,53 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2,09 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt;
+
+`$$PPMI(x) = \max(PMI(x), 0)$$`
+---
+
+# Nivel de tipo: una palabra, un vector
+
+- Cada fila es el vector de una palabra
+   - agrupando datos de todas sus ocurrencias
+
+- Cada columna es un elemento del contexto
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; nodo &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lenguaje &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; palabra &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; español &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; hablar &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; comer &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; lingüística &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3,55 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0,53 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2,09 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; léxico &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3,51 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2,74 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4,27 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0,04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; computacional &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4,27 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; chocolate &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4,51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; mate &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0,46 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+name: study-tokens
+
+# Nivel de caso: una ocurrencia, un vector
+
+### Ocurrencias de *estudiar*
+
+(1) ¿Te gustaría **estudiar** el léxico del neerlandés?
+
+(2) También **estudian** esto en lingüística computacional.
+
+(3) Cuando **estudio** tomo mate y como chocolate.
+
+&lt;hr&gt;
+
+--
+
+.center[(1) ¿Te gustaría **estudiar** el *léxico* del neerlandés?]
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; contexto &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lenguaje &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; palabra &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; español &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; hablar &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; comer &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; léxico &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3,51 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2,74 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4,27 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0,04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.footnote[
+&lt;svg viewBox="0 0 448 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"&gt;&lt;/path&gt;&lt;/svg&gt;
+Schütze (1998), Heylen *et al.* (2015)
+]
+
+---
+template: study-tokens
+
+.center[(2) También **estudian** esto en *lingüística* *computacional*.]
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; contexto &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lenguaje &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; palabra &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; español &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; hablar &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; comer &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; lingüística &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3,55 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0,53 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2,09 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; computacional &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4,27 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+### Fusión de vectores
+
+.center[(2) También **estudian** esto en *lingüística* *computacional*.]
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; contexto &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lenguaje &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; palabra &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; español &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; hablar &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; comer &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; lingüística &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3,55 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0,53 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2,09 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; computacional &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4,27 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+&lt;br&gt;
+
+.center[
+&lt;svg viewBox="0 0 320 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M143 256.3L7 120.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0L313 86.3c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.4 9.5-24.6 9.5-34 .1zm34 192l136-136c9.4-9.4 9.4-24.6 0-33.9l-22.6-22.6c-9.4-9.4-24.6-9.4-33.9 0L160 352.1l-96.4-96.4c-9.4-9.4-24.6-9.4-33.9 0L7 278.3c-9.4 9.4-9.4 24.6 0 33.9l136 136c9.4 9.5 24.6 9.5 34 .1z"&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;svg viewBox="0 0 320 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M143 256.3L7 120.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0L313 86.3c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.4 9.5-24.6 9.5-34 .1zm34 192l136-136c9.4-9.4 9.4-24.6 0-33.9l-22.6-22.6c-9.4-9.4-24.6-9.4-33.9 0L160 352.1l-96.4-96.4c-9.4-9.4-24.6-9.4-33.9 0L7 278.3c-9.4 9.4-9.4 24.6 0 33.9l136 136c9.4 9.5 24.6 9.5 34 .1z"&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;svg viewBox="0 0 320 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M143 256.3L7 120.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0L313 86.3c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.4 9.5-24.6 9.5-34 .1zm34 192l136-136c9.4-9.4 9.4-24.6 0-33.9l-22.6-22.6c-9.4-9.4-24.6-9.4-33.9 0L160 352.1l-96.4-96.4c-9.4-9.4-24.6-9.4-33.9 0L7 278.3c-9.4 9.4-9.4 24.6 0 33.9l136 136c9.4 9.5 24.6 9.5 34 .1z"&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;svg viewBox="0 0 320 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M143 256.3L7 120.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0L313 86.3c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.4 9.5-24.6 9.5-34 .1zm34 192l136-136c9.4-9.4 9.4-24.6 0-33.9l-22.6-22.6c-9.4-9.4-24.6-9.4-33.9 0L160 352.1l-96.4-96.4c-9.4-9.4-24.6-9.4-33.9 0L7 278.3c-9.4 9.4-9.4 24.6 0 33.9l136 136c9.4 9.5 24.6 9.5 34 .1z"&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;svg viewBox="0 0 320 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M143 256.3L7 120.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0L313 86.3c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.4 9.5-24.6 9.5-34 .1zm34 192l136-136c9.4-9.4 9.4-24.6 0-33.9l-22.6-22.6c-9.4-9.4-24.6-9.4-33.9 0L160 352.1l-96.4-96.4c-9.4-9.4-24.6-9.4-33.9 0L7 278.3c-9.4 9.4-9.4 24.6 0 33.9l136 136c9.4 9.5 24.6 9.5 34 .1z"&gt;&lt;/path&gt;&lt;/svg&gt;
+]
+
+&lt;br&gt;
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; nodo &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lenguaje &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; palabra &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; español &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; hablar &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; comer &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; estudiar&lt;sub&gt;2&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7,82 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0,53 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2,09 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+### Vectores de casos
+
+.center[
+.bb.b--gold.shadow-1.pv1.ph2[.gold.b[(1)] ¿Te gustaría **estudiar** el *léxico* del neerlandés?]
+
+&lt;br&gt;
+.bb.b--light-blue.shadow-1.pv1.ph2[.light-blue.b[(2)] También **estudian** esto en *lingüística* *computacional*.]
+
+&lt;br&gt;
+.bb.b--green.shadow-1.mt4.pv1.ph2[.green.b[(3)] Cuando **estudio** tomo *mate* y como *chocolate*.]
+
+]
+
+&lt;br&gt;
+
+.center[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; nodo &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lenguaje &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; palabra &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; español &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; hablar &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; comer &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #E69F00 !important;"&gt; estudiar&lt;sub&gt;1&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;3,51&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;2,74&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;4,27&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;0,04&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #56B4E9 !important;"&gt; estudiar&lt;sub&gt;2&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;3,55&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;0,53&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;2,09&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #009E73 !important;"&gt; estudiar&lt;sub&gt;3&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;4,97&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+---
+
+.pull-left[
+
+#### Texto original
+
+.gold.b[(1)] ¿Te gustaría **estudiar** el *léxico* del neerlandés?
+
+.light-blue.b[(2)] También **estudian** esto en *lingüística* *computacional*.
+
+.green.b[(3)] Cuando **estudio** tomo *mate* y como *chocolate*.
+
+]
+
+
+.pull-right[
+#### Matriz entre casos y contextos
+
+&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; nodo &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lenguaje &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; palabra &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; español &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; hablar &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; comer &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #E69F00 !important;"&gt; estudiar&lt;sub&gt;1&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;3,51&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;2,74&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;4,27&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;0,04&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #56B4E9 !important;"&gt; estudiar&lt;sub&gt;2&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;3,55&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;0,53&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;2,09&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #009E73 !important;"&gt; estudiar&lt;sub&gt;3&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;4,97&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+--
+
+.pull-left.dist[
+
+#### Matriz de distancias entre casos
+
+&lt;table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; caso &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estudiar&lt;sub&gt;1&lt;/sub&gt; &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estudiar&lt;sub&gt;2&lt;/sub&gt; &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estudiar&lt;sub&gt;3&lt;/sub&gt; &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #E69F00 !important;"&gt; estudiar&lt;sub&gt;1&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;0,11&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;1&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #56B4E9 !important;"&gt; estudiar&lt;sub&gt;2&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;0,11&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;1&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: #009E73 !important;"&gt; estudiar&lt;sub&gt;3&lt;/sub&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;1&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: black !important;"&gt;1&lt;/span&gt; &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; &lt;span style="     color: grey !important;"&gt;0&lt;/span&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+--
+.pull-right[
+#### t-SNE: visualización
+.halfsize[
+![t-SNE simulation](../gifs/bubbles-cropped.gif)
+]
+]
+
+.footnote[
+&lt;svg viewBox="0 0 448 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"&gt;&lt;/path&gt;&lt;/svg&gt;
+van der Maaten &amp; Hinton (2008)
+&lt;svg viewBox="0 0 640 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"&gt;&lt;/path&gt;&lt;/svg&gt; `nephosem`, `Rtsne` (Krijthe 2015)
+]
+
+---
+
+# Contenidos
+
+-  .gray[Introducción] 
+
+-  .gray[Modelos distribucionales] 
+
+-  **Comparación de modelos** 
+
+-  Agrupación de ocurrencias 
+
+---
+
+# Comparación de modelos
+
+.pull-left[
+- Distintas formas de definir el contexto:
+
+  - amplitud de la ventana
+  
+  - filtros gramaticales
+  
+  - relaciones sintácticas
+]
+
+--
+
+.pull-right[
+.bg-lightest-blue.b--dark-blue.ba.bw2.br3.shadow-5.mh5.center[
+Pero ninguna configuración de parámetros es óptima para todos los casos.
+]
+]
+
+&lt;img src="index_files/figure-html/stof1-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+.tiny[
+*stof* 'substancia, tela, polvo'; *hoop* 'esperanza, montón'; *heet* 'caliente'; *huldigen* 'sostener (una idea), homenajear'.]
+]
+
+---
+
+## Selección de modelos representativos
+
+.left-column[
+
+- Distancias entre modelos
+
+- PAM (**P**artitioning **A**round **M**edoids)
+
+&lt;svg viewBox="0 0 448 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"&gt;&lt;/path&gt;&lt;/svg&gt; Kaufman &amp; Rousseeuw (1990)
+
+&lt;svg viewBox="0 0 640 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"&gt;&lt;/path&gt;&lt;/svg&gt; `cluster` (Maechler *et al.* 2021)
+
+]
+
+.right-column[
+&lt;iframe src="https://qlvl.github.io/NephoVis/level1.html?type=heffen" width="100%" height="400px" data-external="1"&gt;&lt;/iframe&gt;
+
+]
+
+.footnote[
+&lt;svg viewBox="0 0 640 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"&gt;&lt;/path&gt;&lt;/svg&gt;
+`NephoVis` (Montes &amp; Wielfaert 2021)
+]
+
+---
+
+# Contenidos
+
+-  .gray[Introducción] 
+
+-  .gray[Modelos distribucionales] 
+
+-  .gray[Comparación de modelos] 
+
+-  **Agrupación de ocurrencias** 
+
+---
+
+# Agrupación de ocurrencias
+
+- HDBSCAN: **H**ierarchical **D**ensity-**B**ased **S**patial **C**lustering of **A**pplications with **N**oise
+
+  - Método de agrupamiento jerárquico
+  
+  - No asume que todos los elementos deben ser agrupados
+  
+  - Incluye *probabilidades* de pertenencia
+  
+  - Busca áreas densas rodeadas de áreas menos densas
+  
+.footnote[
+
+&lt;svg viewBox="0 0 448 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"&gt;&lt;/path&gt;&lt;/svg&gt; Campello *et al.* (2013)
+&lt;svg viewBox="0 0 640 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"&gt;&lt;/path&gt;&lt;/svg&gt; `dbscan` (Hahsler &amp; Piekenbrock 2021)
+]
+  
+---
+
+## ¿Para qué?
+
+- Sistema automático de identificación de grupos
+
+- Tiende a coincidir con los grupos que vemos en t-SNE (perplejidad 30) &amp;mdash;al menos en mis datos
+
+.panelset.w-80.center[
+
+.panel[.panel-name[*hachelijk* 'riesgoso/crítico']
+
+.pull-left[
+&lt;img src="index_files/figure-html/hachelijk1-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+--
+.pull-right[
+&lt;img src="index_files/figure-html/hachelijk2-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+]
+.panel[.panel-name[*hoop* 'esperanza/montón']
+
+.pull-left[
+&lt;img src="index_files/figure-html/hoop1-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+--
+.pull-right[
+&lt;img src="index_files/figure-html/hoop2-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+]
+]
+
+---
+
+## Exploración: Shiny App
+
+&lt;iframe src="https://marianamontes.shinyapps.io/Level3/" width="100%" height="480px" data-external="1"&gt;&lt;/iframe&gt;
+
+---
+layout: false
+class: title-slide
+
+.mythanks.center[
+
+# ¡Muchas gracias!
+
+[mariana.montes@kuleuven.be](mailto:mariana.montes@kuleuven.be)
+
+&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M48 352c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm416 0c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm-119 11.1c4.6-14.5 1.6-30.8-9.8-42.3-11.5-11.5-27.8-14.4-42.3-9.9-7-13.5-20.7-23-36.9-23s-29.9 9.5-36.9 23c-14.5-4.6-30.8-1.6-42.3 9.9-11.5 11.5-14.4 27.8-9.9 42.3-13.5 7-23 20.7-23 36.9s9.5 29.9 23 36.9c-4.6 14.5-1.6 30.8 9.9 42.3 8.2 8.2 18.9 12.3 29.7 12.3 4.3 0 8.5-1.1 12.6-2.5 7 13.5 20.7 23 36.9 23s29.9-9.5 36.9-23c4.1 1.3 8.3 2.5 12.6 2.5 10.8 0 21.5-4.1 29.7-12.3 11.5-11.5 14.4-27.8 9.8-42.3 13.5-7 23-20.7 23-36.9s-9.5-29.9-23-36.9zM512 224c0-53-43-96-96-96-.6 0-1.1.2-1.6.2 1.1-5.2 1.6-10.6 1.6-16.2 0-44.2-35.8-80-80-80-24.6 0-46.3 11.3-61 28.8C256.4 24.8 219.3 0 176 0 114.1 0 64 50.1 64 112c0 7.3.8 14.3 2.1 21.2C27.8 145.8 0 181.5 0 224c0 53 43 96 96 96h43.4c3.6-8 8.4-15.4 14.8-21.8 13.5-13.5 31.5-21.1 50.8-21.3 13.5-13.2 31.7-20.9 51-20.9s37.5 7.7 51 20.9c19.3.2 37.3 7.8 50.8 21.3 6.4 6.4 11.3 13.8 14.8 21.8H416c53 0 96-43 96-96z"&gt;&lt;/path&gt;&lt;/svg&gt; [https://qlvl.github.io/NephoVis/](https://qlvl.github.io/NephoVis/)
+]
+
+---
+
+# Bibliografía &amp;mdash; &lt;svg viewBox="0 0 448 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"&gt;&lt;/path&gt;&lt;/svg&gt;
+
+.f6[
+Campello, Ricardo J. G. B., Davoud Moulavi &amp; Joerg Sander. 2013. Density-Based Clustering Based on Hierarchical Density Estimates. In Jian Pei, Vincent S. Tseng, Longbing Cao, Hiroshi Motoda &amp; Guandong Xu (eds.), *Advances in Knowledge Discovery and Data Mining*, 160–172. Berlin, Heidelberg: Springer.
+
+Church, Kenneth Ward &amp; Patrick Hanks. 1989. Word association norms, mutual information, and lexicography. In ACL ’89: *Proceedings of the 27th annual meeting on Association for Computational Linguistic*, 76–83. Association for Computational Linguistics.
+
+Firth, John Rupert. 1957. A synopsis of linguistic theory 1930-1955. In John Rupert Firth (ed.), *Studies in Linguistic Analysis*, 1–32. Oxford: Blackwell.
+
+Harris, Zellig S. 1954. Distributional structure. *Word.* 10(2–3). 146–162.
+
+Heylen, Kris, Thomas Wielfaert, Dirk Speelman &amp; Dirk Geeraerts. 2015. Monitoring polysemy: Word space models as a tool for large-scale lexical semantic analysis. *Lingua 157*. 153–172.
+
+Kaufman, Leonard &amp; Peter J. Rousseeuw. 1990. Partitioning Around Medoids (Program PAM). In *Finding Groups in Data: An Introduction to Cluster Analysis*, 68–125. Hoboken, NJ, USA: John Wiley &amp; Sons, Inc.
+
+Maaten, L.J.P. van der &amp; G.E. Hinton. 2008. Visualizing high-dimensional data using t-SNE. *Journal of Machine Learning Research 9*. 2579–2605.
+
+Montes, Mariana. 2021. *Cloudspotting: visual analytics for distributional semantics*. Leuven: KU Leuven PhD Dissertation.
+
+Schütze, Hinrich. 1998. Automatic Word Sense Discrimination. *Computational Linguistics 24*(1). 97–123.
+]
+
+---
+
+# Code &amp;mdash; &lt;svg viewBox="0 0 640 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"&gt;&lt;/path&gt;&lt;/svg&gt;
+
+.f6[
+Chang, Winston, Joe Cheng, JJ Allaire, Carson Sievert, Barret Schloerke, Yihui Xie, Jeff Allen, Jonathan McPherson, Alan Dipert &amp; Barbara Borges. 2021. shiny: Web application framework for r. Manual. https://shiny.rstudio.com/.
+
+Hahsler, Michael, Matthew Piekenbrock &amp; Derek Doran. 2019. dbscan: Fast density-based clustering with R. Journal of Statistical Software 91(1). 1–30. https://doi.org/10.18637/jss.v091.i01.
+
+Krijthe, Jesse. 2018. Rtsne: T-distributed stochastic neighbor embedding using a barnes-hut implementation. https://github.com/jkrijthe/Rtsne.
+
+Maechler, Martin, Peter Rousseeuw, Anja Struyf &amp; Mia Hubert. 2021. cluster: “Finding Groups in Data”: Cluster analysis extended rousseeuw et al. https://svn.r-project.org/R-packages/trunk/cluster/.
+
+Montes, Mariana &amp; Thomas Wielfaert. 2021. QLVL/NephoVis: Altostratus. Zenodo. https://doi.org/10.5281/ZENODO.5116843.
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="../myjs.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
