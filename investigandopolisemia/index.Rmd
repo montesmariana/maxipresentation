@@ -103,7 +103,7 @@ meta() %>%
     twitter_creator = "@roblerobusto"
   )
 ```
-```{r sourcecode, include=FALSE, code=readLines("../R/presentations.R")}
+```{r sourcecode, include=FALSE, code=readLines(here::here("R", "presentations.R"))}
 ```
 
 .measure.mytitle[
