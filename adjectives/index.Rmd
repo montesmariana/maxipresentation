@@ -1,0 +1,559 @@
+---
+title: "How vector space models disambiguate adjectives"
+author: "Mariana Montes & Dirk Geeraerts"
+institute: "![kuleuven icon](../icons/kuleuven.png)"
+date: "02/02/2022"
+output:
+  xaringan::moon_reader:
+    seal: false
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "../myjs.js"
+      ratio: 16:9
+    css: [xaringan-themer.css, custom.css]
+---
+
+class: title-slide
+
+```{r xaringanthemer, include=FALSE, warning=FALSE}
+options(htmltools.dir.version = FALSE, readr.show_col_types = FALSE,
+        knitr.kable.NA = 0)
+
+library(xaringanthemer)
+library(knitr); library(tidyverse)
+library(icons)
+library(kableExtra)
+source(here::here("R", "scales.R"))
+
+knitr::opts_chunk$set(
+  # fig.height = 10
+)
+
+my_blue <- "#0266a0ff"
+style_mono_accent(
+  base_color = my_blue,
+  colors = c(
+    white = "#FFFFFF",
+    gray = "#A9A9A9"
+  ),
+  title_slide_background_image = "img/cover.png",
+  title_slide_background_color = "#FFFFFF",
+  title_slide_text_color = my_blue
+  )
+down_arrow <- icon_style(fontawesome("angle-double-down"), fill = my_blue)
+book <- icon_style(fontawesome("book"), fill = my_blue)
+code <- icon_style(fontawesome("code"), fill = my_blue)
+
+
+outline <- c(
+  "Distributional semantics and cognitive semantics",
+  "Expected results",
+  "Actual results",
+  "Conclusion"
+)
+
+
+printOutline <- function(outline, highlight = double()) {
+  if (length(highlight) > 0) {
+    for (i in highlight) {
+      outline[[i]] <- sprintf("**%s**", outline[[i]])
+    }
+    if (min(highlight) > 1) {
+      for (i in 1:(min(highlight)-1)) {
+        outline[[i]] <- sprintf(".gray[%s]", outline[[i]])
+      }
+    }
+  }
+  walk(paste("- ", outline, "\n\n"), cat)
+}
+
+```
+
+```{r xaringanExtra, eval=require("xaringanExtra"), echo=FALSE, warning=FALSE}
+library(xaringanExtra)
+use_panelset()
+#use_animate_css()
+use_logo(
+  image_url = "../icons/cloud-qlvl-blue.png",
+  width = "90px",
+  link_url = "https://www.arts.kuleuven.be/ling/qlvl/projects/current/nephological-semantics"
+)
+use_tachyons()
+use_share_again()
+use_animate_css()
+```
+
+```{r metathis, echo=FALSE, warning=FALSE}
+library(metathis)
+meta() %>%
+  meta_name("github-repo" = "montesmariana/maxipresentation") %>% 
+  meta_social(
+    title = "How vector space models disambiguate adjectives",
+    description = paste(
+      "Talk at the German Cognitive Linguistics Conference; Online, March 2022."
+    ),
+    url = "https://montesmariana.github.io/maxipresentation/adjectives/",
+    image = "https://montesmariana.github.io/maxipresentation/adjectives/social-card.png",
+    image_alt = paste(
+      "Scattered scatter plots on a white background surrounding the title and author of a presentation: 'How vector space models disambiguate adjectives', by Mariana Montes and Dirk Geeraerts. On the left side, a group of points in light blue, green and yellow are surrounded by a circle of dashed lines. A larger circle, linked to it simulating a magnifying glass, stands on top of the scatterplot. Inside it has a snippet of a concordance view with the Dutch adjective 'hachelijk' on focus on the three colors and fragments of contexts to either side of the word."
+    ),
+    og_type = "website",
+    og_author = "Mariana Montes",
+    twitter_card_type = "summary_large_image",
+    twitter_creator = "@roblerobusto"
+  )
+```
+
+.measure.mytitle[
+# `r rmarkdown::metadata$title`
+
+## `r rmarkdown::metadata$subtitle`
+
+**`r rmarkdown::metadata$author`**
+
+`r rmarkdown::metadata$institute` 
+
+]
+
+---
+layout: true
+
+.date-footnote[DGKL-Erfurt, 02/02/2022]
+
+---
+
+# Outline
+
+```{r, echo = FALSE, results="asis"}
+printOutline(outline)
+```
+
+---
+
+# Outline
+
+```{r, echo = FALSE, results="asis"}
+printOutline(outline, 1)
+```
+
+---
+
+## Distributional semantics
+
+.bg-dark-blue.b--dark-blue.ba.bw2.br3.shadow-5.mh5.center.white[
+Words with similar distribution are semantically similar.
+]
+
+<br>
+
+**Similar distribution**: attested (with similar frequency) in similar circumstances.
+
+Can we use frequency information to represent semantic relationships?
+
+.footnote[
+`r book` Firth (1957), Harris (1954)
+]
+
+
+---
+
+name: vsm-intro
+
+## What are vector space models?
+
+.center[**word vectors** &rarr; numerical representations of words]
+
+```{r echo=FALSE}
+vex <- read_csv("data/vectorexample.csv", show_col_types = F) %>%
+  select(target, `language/n`, `word/n`, `english/j`, `speak/v`, everything()) %>% 
+  mutate(across(where(is.numeric), round, 2))
+
+kable(slice(vex, 1))
+```
+
+--
+
+<br> 
+
+$$PMI_{(\mathrm{linguistics}, \mathrm{language})} = \log\frac{p(\mathrm{linguistics}, \mathrm{language})}{p(\mathrm{linguistics})p(\mathrm{language})}$$
+
+.footnote[
+`r fontawesome("info-circle")`
+Actual values from GloWbE (Global Web-based English corpus), with a window-span of 10 words to either side.
+
+PMI: [Pointwise Mutual information](https://en.wikipedia.org/wiki/Pointwise_mutual_information)
+
+`r book` Church & Hanks (1989)
+]
+
+
+---
+template: vsm-intro
+
+<br>
+
+$$PMI_{(\mathrm{linguistics}, \mathrm{language})} = \log\frac{285/N}{\frac{20,740}{N}\frac{1.58 \times 10^6}{N}}$$
+---
+
+template: vsm-intro
+
+<br>
+
+$$PMI_{(\mathrm{linguistics}, \mathrm{language})} = \log\frac{285}{20,740\times 1.58 \times 10^6}9.14 \times 10^8 = 4.37$$
+---
+name: type-level
+
+## Type level vectors
+
+- Each row is the vector of a word
+   - aggregating over all its occurrences
+
+- Each column is a context feature
+
+---
+template: type-level
+
+- Values are PMI
+
+  
+```{r echo=FALSE, eval=require("kableExtra")}
+kbl(vex, escape=FALSE)
+```
+
+---
+template: type-level
+
+- Values are **P**PMI: negative values turned to 0.
+
+
+
+```{r echo=FALSE, eval=require("kableExtra")}
+tozero <- function(x) if (is.na(x) | x < 0) return(0) else return(x)
+
+vex <- vex %>%
+  mutate(across(where(is.numeric), map_dbl, tozero))
+kbl(vex, escape=FALSE)
+```
+
+---
+name: study-tokens
+
+## Token level vectors
+
+### Tokens of *to study*
+
+(1) Would you like to **study** linguistics?
+
+(2) They **study** this in computational linguistics too.
+
+(3) I eat chocolate while I **study**.
+
+<hr>
+
+--
+
+.center[(1) Would you like to **study** *linguistics*?]
+
+```{r, echo=FALSE, eval=require("kableExtra")}
+vex %>% filter(target == "linguistics/n") %>%
+  rename(`context feature` = target) %>% kbl()
+```
+
+.footnote[
+`r book`
+Schütze (1998), Heylen *et al.* (2015)
+]
+
+---
+template: study-tokens
+
+.center[(2) They **study** this in *computational linguistics* too.]
+
+```{r, echo=FALSE, eval=require("kableExtra")}
+vex %>%
+  filter(target %in% c("linguistics/n", "computational/j")) %>%
+  rename(`context feature` = target) %>% kbl()
+```
+
+---
+
+### Merging vectors
+
+.center[(2) They **study** this in *computational linguistics* too.]
+
+```{r, echo=FALSE, eval=require("kableExtra")}
+vex %>%
+  filter(target %in% c("linguistics/n", "computational/j")) %>%
+  rename(`context feature` = target) %>% kbl()
+```
+
+--
+<br>
+
+.center[
+`r down_arrow`
+`r down_arrow`
+`r down_arrow`
+`r down_arrow`
+`r down_arrow`
+]
+
+<br>
+
+```{r, echo=FALSE, eval=require("kableExtra")}
+s2 <- vex %>%
+  filter(target %in% c("linguistics/n", "computational/j")) %>%
+  select(-target) %>% colSums() %>% as_tibble_row() %>% 
+  mutate(target = "study<sub>2</sub>") %>% 
+  select(target, everything())
+kbl(s2, escape=FALSE)
+
+```
+
+---
+
+### Token level vectors
+
+.center[
+.bb.b--gold.shadow-1.pv1.ph2[.gold.b[(1)] Would you like to **study** *linguistics*?]
+
+<br>
+.bb.b--light-blue.shadow-1.pv1.ph2[.light-blue.b[(2)] They **study** this in *computational linguistics* too.]
+
+<br>
+.bb.b--green.shadow-1.mt4.pv1.ph2[.green.b[(3)] I eat *chocolate* while I **study**.]
+
+]
+
+<br>
+
+.center[
+```{r, echo=FALSE, eval=require("kableExtra")}
+tokens <- read_csv("data/tokensexample.csv", show_col_types = F) %>%
+  kbl(escape = FALSE)
+
+tokens %>% column_spec(1, color = palette_OkabeIto[1:3], bold=TRUE)
+```
+]
+
+
+---
+
+.pull-left[
+
+#### Original text
+
+.gold.b[(1)] Would you like to **study** *linguistics*?
+
+.light-blue.b[(2)] They **study** this in *computational linguistics* too.
+
+.green.b[(3)] I eat *chocolate* while I **study**.
+
+]
+
+
+.pull-right[
+#### Token-context matrix
+
+```{r, echo=FALSE, eval=require("kableExtra")}
+tokens %>% 
+  kable_styling(font_size = 11) %>% 
+  column_spec(1, color = palette_OkabeIto[1:3], bold=TRUE)
+```
+
+]
+
+--
+
+.pull-left.dist[
+
+#### Token-token distance matrix
+```{r, echo=FALSE, eval=require("kableExtra")}
+tdist <- read_csv("data/tokendist.csv", show_col_types = F) %>% 
+  select(token, everything()) %>% 
+  mutate_if(is.numeric, ~round(1-.x, 3)) %>% 
+  mutate_if(is.numeric, ~cell_spec(.x, color = if_else(.x == 0, "grey", "black")))
+colnames(tdist) <- c("target", tdist$token)
+kbl(tdist, escape = FALSE) %>% 
+  column_spec(1, color = palette_OkabeIto[1:3], bold=TRUE)
+```
+]
+
+--
+.pull-right[
+#### t-SNE visualization
+![:img 60%, t-SNE simulation](../gifs/bubbles-cropped.gif)
+]
+
+.footnote[
+`r book`
+van der Maaten & Hinton (2008)
+`r code` `nephosem` (QLVL 2021), `Rtsne` (Krijthe 2015)
+]
+
+---
+
+## Distributional semantics and cognitive semantics
+
+- Usage based method
+
+- Bottom-up identification of patterns
+
+- Non discrete categories
+
+---
+
+# Outline
+
+```{r, echo = FALSE, results="asis"}
+printOutline(outline, 2)
+```
+
+---
+
+## Expectations
+
+The adjective and the noun it modifies...
+
+- ...are typically close in the context (for bag-of-words models)
+
+- ...have consistent and close syntactic relationships.
+
+Senses of an adjective often correspond to semantic categories of the noun:
+
+- The more different those categories are, the better the model will disambiguate
+
+
+---
+
+# Outline
+
+```{r, echo = FALSE, results="asis"}
+printOutline(outline, 3)
+```
+
+---
+
+## Not only adjective-object (thinking emoji)
+
+<!-- TODO add hoopvol example for 'other predicative constructions', add heilzaam with werken and werking -->
+
+<!-- TODO show heilzaam plots -->
+
+
+.footnote[
+
+`r book` Campello *et al.* (2013)
+`r code` `dbscan` (Hahsler & Piekenbrock 2021); `NephoVis` (Montes & Wielfaert 2021); `shiny` (Chang *et al.* 2021)
+
+]
+
+---
+
+## Dominance of few frequent context words (horror emoji? strong emoji?)
+
+<!-- TODO compare hachelijk and hoekig -->
+
+---
+
+## Combination of context words (fascinated emoji?)
+
+<!-- TODO show hachelijk positie (and situatie) -->
+
+---
+
+## Internal sense structure (monocule emoji)
+
+<!-- TODO show geldig -->
+
+---
+
+# Outline
+
+```{r, echo = FALSE, results="asis"}
+printOutline(outline, 4)
+```
+
+---
+
+# Insights
+
+- Models do represent contextual patterns. 
+--
+But they do not necessarily correspond to semantic phenomena.
+
+--
+
+- Their shape and strength correspond to **frequency**, **distinctiveness** and **relatedness** of the context words.
+
+--
+
+- We wanted to model senses with patterns, but we didn't *know* the patterns: 
+--
+The models do not show the senses, but do teach us about the patterns!
+
+.footnote[
+
+`r book` Montes (2021)
+
+]
+
+---
+layout: false
+class: title-slide
+
+.mythanks[
+
+# Thank you!
+
+[mariana.montes@kuleuven.be](mailto:mariana.montes@kuleuven.be)
+
+`r icon_style(fontawesome("cloud-meatball"), fill="#0266a0")` [https://qlvl.github.io/NephoVis/](https://qlvl.github.io/NephoVis/)
+]
+
+---
+
+# References &mdash; `r book`
+
+.f6[
+Campello, Ricardo J. G. B., Davoud Moulavi & Joerg Sander. 2013. Density-Based Clustering Based on Hierarchical Density Estimates. In Jian Pei, Vincent S. Tseng, Longbing Cao, Hiroshi Motoda & Guandong Xu (eds.), *Advances in Knowledge Discovery and Data Mining*, 160–172. Berlin, Heidelberg: Springer.
+
+Church, Kenneth Ward & Patrick Hanks. 1989. Word association norms, mutual information, and lexicography. In ACL ’89: *Proceedings of the 27th annual meeting on Association for Computational Linguistic*, 76–83. Association for Computational Linguistics.
+
+Firth, John Rupert. 1957. A synopsis of linguistic theory 1930-1955. In John Rupert Firth (ed.), *Studies in Linguistic Analysis*, 1–32. Oxford: Blackwell.
+
+Harris, Zellig S. 1954. Distributional structure. *Word.* 10(2–3). 146–162.
+
+Heylen, Kris, Thomas Wielfaert, Dirk Speelman & Dirk Geeraerts. 2015. Monitoring polysemy: Word space models as a tool for large-scale lexical semantic analysis. *Lingua 157*. 153–172.
+
+Kaufman, Leonard & Peter J. Rousseeuw. 1990. Partitioning Around Medoids (Program PAM). In *Finding Groups in Data: An Introduction to Cluster Analysis*, 68–125. Hoboken, NJ, USA: John Wiley & Sons, Inc.
+
+Maaten, L.J.P. van der & G.E. Hinton. 2008. Visualizing high-dimensional data using t-SNE. *Journal of Machine Learning Research 9*. 2579–2605.
+
+Montes, Mariana. 2021. *Cloudspotting: visual analytics for distributional semantics*. Leuven: KU Leuven PhD Dissertation.
+
+Schütze, Hinrich. 1998. Automatic Word Sense Discrimination. *Computational Linguistics 24*(1). 97–123.
+]
+
+---
+
+# Code &mdash; `r code`
+
+.f6[
+Chang, Winston, Joe Cheng, JJ Allaire, Carson Sievert, Barret Schloerke, Yihui Xie, Jeff Allen, Jonathan McPherson, Alan Dipert & Barbara Borges. 2021. shiny: Web application framework for r. Manual. https://shiny.rstudio.com/.
+
+Hahsler, Michael, Matthew Piekenbrock & Derek Doran. 2019. dbscan: Fast density-based clustering with R. Journal of Statistical Software 91(1). 1–30. https://doi.org/10.18637/jss.v091.i01.
+
+Krijthe, Jesse. 2018. Rtsne: T-distributed stochastic neighbor embedding using a barnes-hut implementation. https://github.com/jkrijthe/Rtsne.
+
+Montes, Mariana & Thomas Wielfaert. 2021. QLVL/NephoVis: Altostratus. Zenodo. https://doi.org/10.5281/ZENODO.5116843.
+
+QLVL. 2021. nephosem. Zenodo. https://doi.org/10.5281/ZENODO.5710426.
+]
+
+-----
+
+*If you want to apply this methodology, you can find the python code [here](https://montesmariana.github.io/semasioFlow/tutorials/createClouds.html) and the R code [here](https://montesmariana.github.io/semcloud/articles/processClouds.html) (they are used in sequence); the github repository for the [Shiny App](https://marianamontes.shinyapps.io/Level3/), which combines HDBSCAN output, is [here](https://github.com/montesmariana/Level3). The repository for the visualization tool is [here](https://github.com/qlvl/NephoVis)*.
