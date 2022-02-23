@@ -1,5 +1,6 @@
 ---
 title: "How vector space models disambiguate adjectives"
+subtitle: "A perilous but valid enterprise"
 author: "Mariana Montes & Dirk Geeraerts"
 institute: "![kuleuven icon](../icons/kuleuven.png)"
 date: "02/02/2022"
@@ -50,8 +51,8 @@ code <- icon_style(fontawesome("code"), fill = my_blue)
 
 outline <- c(
   "Distributional semantics and cognitive semantics",
-  "Expected results",
-  "Actual results",
+  "Simplified assumptions",
+  "Some results",
   "Conclusion"
 )
 
@@ -189,20 +190,6 @@ PMI: [Pointwise Mutual information](https://en.wikipedia.org/wiki/Pointwise_mutu
 `r book` Church & Hanks (1989)
 ]
 
-
----
-template: vsm-intro
-
-<br>
-
-$$PMI_{(\mathrm{linguistics}, \mathrm{language})} = \log\frac{285/N}{\frac{20,740}{N}\frac{1.58 \times 10^6}{N}}$$
----
-
-template: vsm-intro
-
-<br>
-
-$$PMI_{(\mathrm{linguistics}, \mathrm{language})} = \log\frac{285}{20,740\times 1.58 \times 10^6}9.14 \times 10^8 = 4.37$$
 ---
 name: type-level
 
@@ -398,11 +385,27 @@ van der Maaten & Hinton (2008)
 
 ## Distributional semantics and cognitive semantics
 
+.pull-left[
+
 - Usage based method
 
 - Bottom-up identification of patterns
 
 - Non discrete categories
+
+]
+
+.pull-right[
+![:img 90%, exampleplot](img/exampleplot.png)
+]
+
+.footnote[
+.measure[
+`r book` Campello *et al.* (2013)
+`r code` `dbscan` (Hahsler & Piekenbrock 2021);
+`NephoVis` (Montes & Wielfaert 2021); `shiny` (Chang *et al.* 2021)]
+
+]
 
 ---
 
@@ -414,7 +417,7 @@ printOutline(outline, 2)
 
 ---
 
-## Expectations
+## (Simplified) assumptions
 
 The adjective and the noun it modifies...
 
@@ -426,6 +429,11 @@ Senses of an adjective often correspond to semantic categories of the noun:
 
 - The more different those categories are, the better the model will disambiguate
 
+<br>
+
+.bg-dark-blue.b--dark-blue.ba.bw2.br3.shadow-5.mh5.center.white[
+How far off are these assumptions?
+]
 
 ---
 
@@ -437,37 +445,42 @@ printOutline(outline, 3)
 
 ---
 
-## Not only adjective-object (thinking emoji)
+### Modified noun vs predicated entity `r emo::ji('thinking_face')`
 
-<!-- TODO add hoopvol example for 'other predicative constructions', add heilzaam with werken and werking -->
+<!-- TODO add examples of occurrences -->
 
-<!-- TODO show heilzaam plots -->
+.center[![:img 50%, Plot of heilzaam](img/heilzaam.png)]
 
+---
 
-.footnote[
+## Frequency + Distinctiveness `r emo::ji('scream')`
 
-`r book` Campello *et al.* (2013)
-`r code` `dbscan` (Hahsler & Piekenbrock 2021); `NephoVis` (Montes & Wielfaert 2021); `shiny` (Chang *et al.* 2021)
+<!-- TODO highlight some groups? Maybe check the kinds of nouns... -->
+.pull-left[
+![:img 90%, Plot of hoekig](img/hoekig.png)
+]
 
+--
+
+.pull-right[
+![:img 90%, Plot of hachelijk](img/hachelijk.png)
 ]
 
 ---
 
-## Dominance of few frequent context words (horror emoji? strong emoji?)
+## Combination of context words `r emo::ji('star_struck')`
 
-<!-- TODO compare hachelijk and hoekig -->
+<!-- TODO circle and show positie/situatie -->
 
----
-
-## Combination of context words (fascinated emoji?)
-
-<!-- TODO show hachelijk positie (and situatie) -->
+.center[![:img 50%, Plot of hachelijk](img/hachelijk.png)]
 
 ---
 
-## Internal sense structure (monocule emoji)
+## Internal sense structure `r emo::ji('monocle')`
 
-<!-- TODO show geldig -->
+<!-- TODO add circles with the highest context words -->
+
+.center[![:img 50%, Plot of geldig](img/geldig.png)]
 
 ---
 
@@ -491,7 +504,8 @@ But they do not necessarily correspond to semantic phenomena.
 
 --
 
-- We wanted to model senses with patterns, but we didn't *know* the patterns: 
+- We wanted to model senses with patterns, but we didn't *know* the patterns.
+
 --
 The models do not show the senses, but do teach us about the patterns!
 
@@ -511,7 +525,7 @@ class: title-slide
 
 [mariana.montes@kuleuven.be](mailto:mariana.montes@kuleuven.be)
 
-`r icon_style(fontawesome("cloud-meatball"), fill="#0266a0")` [https://qlvl.github.io/NephoVis/](https://qlvl.github.io/NephoVis/)
+`r icon_style(fontawesome("external-link-alt"), fill="#0266a0")` [https://slides.montesmariana.me/adjectives](https://slides.montesmariana.me/adjectives)
 ]
 
 ---

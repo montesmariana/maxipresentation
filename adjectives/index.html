@@ -84,7 +84,7 @@ top:1em;right:1em;
 .measure.mytitle[
 # How vector space models disambiguate adjectives
 
-## 
+## A perilous but valid enterprise
 
 **Mariana Montes &amp; Dirk Geeraerts**
 
@@ -103,9 +103,9 @@ layout: true
 
 -  Distributional semantics and cognitive semantics 
 
--  Expected results 
+-  Simplified assumptions 
 
--  Actual results 
+-  Some results 
 
 -  Conclusion 
 
@@ -115,9 +115,9 @@ layout: true
 
 -  **Distributional semantics and cognitive semantics** 
 
--  Expected results 
+-  Simplified assumptions 
 
--  Actual results 
+-  Some results 
 
 -  Conclusion 
 
@@ -188,20 +188,6 @@ PMI: [Pointwise Mutual information](https://en.wikipedia.org/wiki/Pointwise_mutu
 &lt;svg viewBox="0 0 448 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"&gt;&lt;/path&gt;&lt;/svg&gt; Church &amp; Hanks (1989)
 ]
 
-
----
-template: vsm-intro
-
-&lt;br&gt;
-
-`$$PMI_{(\mathrm{linguistics}, \mathrm{language})} = \log\frac{285/N}{\frac{20,740}{N}\frac{1.58 \times 10^6}{N}}$$`
----
-
-template: vsm-intro
-
-&lt;br&gt;
-
-`$$PMI_{(\mathrm{linguistics}, \mathrm{language})} = \log\frac{285}{20,740\times 1.58 \times 10^6}9.14 \times 10^8 = 4.37$$`
 ---
 name: type-level
 
@@ -692,11 +678,27 @@ van der Maaten &amp; Hinton (2008)
 
 ## Distributional semantics and cognitive semantics
 
+.pull-left[
+
 - Usage based method
 
 - Bottom-up identification of patterns
 
 - Non discrete categories
+
+]
+
+.pull-right[
+![:img 90%, exampleplot](img/exampleplot.png)
+]
+
+.footnote[
+.measure[
+&lt;svg viewBox="0 0 448 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"&gt;&lt;/path&gt;&lt;/svg&gt; Campello *et al.* (2013)
+&lt;svg viewBox="0 0 640 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"&gt;&lt;/path&gt;&lt;/svg&gt; `dbscan` (Hahsler &amp; Piekenbrock 2021);
+`NephoVis` (Montes &amp; Wielfaert 2021); `shiny` (Chang *et al.* 2021)]
+
+]
 
 ---
 
@@ -704,15 +706,15 @@ van der Maaten &amp; Hinton (2008)
 
 -  .gray[Distributional semantics and cognitive semantics] 
 
--  **Expected results** 
+-  **Simplified assumptions** 
 
--  Actual results 
+-  Some results 
 
 -  Conclusion 
 
 ---
 
-## Expectations
+## (Simplified) assumptions
 
 The adjective and the noun it modifies...
 
@@ -724,6 +726,11 @@ Senses of an adjective often correspond to semantic categories of the noun:
 
 - The more different those categories are, the better the model will disambiguate
 
+&lt;br&gt;
+
+.bg-dark-blue.b--dark-blue.ba.bw2.br3.shadow-5.mh5.center.white[
+How far off are these assumptions?
+]
 
 ---
 
@@ -731,45 +738,50 @@ Senses of an adjective often correspond to semantic categories of the noun:
 
 -  .gray[Distributional semantics and cognitive semantics] 
 
--  .gray[Expected results] 
+-  .gray[Simplified assumptions] 
 
--  **Actual results** 
+-  **Some results** 
 
 -  Conclusion 
 
 ---
 
-## Not only adjective-object (thinking emoji)
+### Modified noun vs predicated entity 🤔
 
-&lt;!-- TODO add hoopvol example for 'other predicative constructions', add heilzaam with werken and werking --&gt;
+&lt;!-- TODO add examples of occurrences --&gt;
 
-&lt;!-- TODO show heilzaam plots --&gt;
+.center[![:img 50%, Plot of heilzaam](img/heilzaam.png)]
 
+---
 
-.footnote[
+## Frequency + Distinctiveness 😱
 
-&lt;svg viewBox="0 0 448 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z"&gt;&lt;/path&gt;&lt;/svg&gt; Campello *et al.* (2013)
-&lt;svg viewBox="0 0 640 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0ff;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"&gt;&lt;/path&gt;&lt;/svg&gt; `dbscan` (Hahsler &amp; Piekenbrock 2021); `NephoVis` (Montes &amp; Wielfaert 2021); `shiny` (Chang *et al.* 2021)
+&lt;!-- TODO highlight some groups? Maybe check the kinds of nouns... --&gt;
+.pull-left[
+![:img 90%, Plot of hoekig](img/hoekig.png)
+]
 
+--
+
+.pull-right[
+![:img 90%, Plot of hachelijk](img/hachelijk.png)
 ]
 
 ---
 
-## Dominance of few frequent context words (horror emoji? strong emoji?)
+## Combination of context words 🤩
 
-&lt;!-- TODO compare hachelijk and hoekig --&gt;
+&lt;!-- TODO circle and show positie/situatie --&gt;
 
----
-
-## Combination of context words (fascinated emoji?)
-
-&lt;!-- TODO show hachelijk positie (and situatie) --&gt;
+.center[![:img 50%, Plot of hachelijk](img/hachelijk.png)]
 
 ---
 
-## Internal sense structure (monocule emoji)
+## Internal sense structure 🧐
 
-&lt;!-- TODO show geldig --&gt;
+&lt;!-- TODO add circles with the highest context words --&gt;
+
+.center[![:img 50%, Plot of geldig](img/geldig.png)]
 
 ---
 
@@ -777,9 +789,9 @@ Senses of an adjective often correspond to semantic categories of the noun:
 
 -  .gray[Distributional semantics and cognitive semantics] 
 
--  .gray[Expected results] 
+-  .gray[Simplified assumptions] 
 
--  .gray[Actual results] 
+-  .gray[Some results] 
 
 -  **Conclusion** 
 
@@ -797,7 +809,8 @@ But they do not necessarily correspond to semantic phenomena.
 
 --
 
-- We wanted to model senses with patterns, but we didn't *know* the patterns: 
+- We wanted to model senses with patterns, but we didn't *know* the patterns.
+
 --
 The models do not show the senses, but do teach us about the patterns!
 
@@ -817,7 +830,7 @@ class: title-slide
 
 [mariana.montes@kuleuven.be](mailto:mariana.montes@kuleuven.be)
 
-&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M48 352c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm416 0c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm-119 11.1c4.6-14.5 1.6-30.8-9.8-42.3-11.5-11.5-27.8-14.4-42.3-9.9-7-13.5-20.7-23-36.9-23s-29.9 9.5-36.9 23c-14.5-4.6-30.8-1.6-42.3 9.9-11.5 11.5-14.4 27.8-9.9 42.3-13.5 7-23 20.7-23 36.9s9.5 29.9 23 36.9c-4.6 14.5-1.6 30.8 9.9 42.3 8.2 8.2 18.9 12.3 29.7 12.3 4.3 0 8.5-1.1 12.6-2.5 7 13.5 20.7 23 36.9 23s29.9-9.5 36.9-23c4.1 1.3 8.3 2.5 12.6 2.5 10.8 0 21.5-4.1 29.7-12.3 11.5-11.5 14.4-27.8 9.8-42.3 13.5-7 23-20.7 23-36.9s-9.5-29.9-23-36.9zM512 224c0-53-43-96-96-96-.6 0-1.1.2-1.6.2 1.1-5.2 1.6-10.6 1.6-16.2 0-44.2-35.8-80-80-80-24.6 0-46.3 11.3-61 28.8C256.4 24.8 219.3 0 176 0 114.1 0 64 50.1 64 112c0 7.3.8 14.3 2.1 21.2C27.8 145.8 0 181.5 0 224c0 53 43 96 96 96h43.4c3.6-8 8.4-15.4 14.8-21.8 13.5-13.5 31.5-21.1 50.8-21.3 13.5-13.2 31.7-20.9 51-20.9s37.5 7.7 51 20.9c19.3.2 37.3 7.8 50.8 21.3 6.4 6.4 11.3 13.8 14.8 21.8H416c53 0 96-43 96-96z"&gt;&lt;/path&gt;&lt;/svg&gt; [https://qlvl.github.io/NephoVis/](https://qlvl.github.io/NephoVis/)
+&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#0266a0;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"&gt;&lt;/path&gt;&lt;/svg&gt; [https://slides.montesmariana.me/adjectives](https://slides.montesmariana.me/adjectives)
 ]
 
 ---
