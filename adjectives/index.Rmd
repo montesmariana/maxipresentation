@@ -48,27 +48,44 @@ down_arrow <- icon_style(fontawesome("angle-double-down"), fill = my_blue)
 book <- icon_style(fontawesome("book"), fill = my_blue)
 code <- icon_style(fontawesome("code"), fill = my_blue)
 
+outline_highlight <- 0
+printOutline <- function() {
+    outline <- c(
+    "Distributional semantics and cognitive semantics",
+    "Setup",
+    "Findings",
+    "Summary"
+  )
 
-outline <- c(
-  "Distributional semantics and cognitive semantics",
-  "Simplified assumptions",
-  "Some results",
-  "Conclusion"
-)
-
-
-printOutline <- function(outline, highlight = double()) {
-  if (length(highlight) > 0) {
-    for (i in highlight) {
-      outline[[i]] <- sprintf("**%s**", outline[[i]])
-    }
-    if (min(highlight) > 1) {
-      for (i in 1:(min(highlight)-1)) {
+  if (outline_highlight > 0) {
+    outline[[outline_highlight]] <- sprintf("**%s**", outline[[outline_highlight]])
+    if (outline_highlight > 1) {
+      for (i in 1:(outline_highlight-1)) {
         outline[[i]] <- sprintf(".gray[%s]", outline[[i]])
       }
     }
   }
   walk(paste("- ", outline, "\n\n"), cat)
+  outline_highlight <<- outline_highlight + 1
+}
+level <- 1
+printInsights <- function() {
+  insights <- c(
+  'Frequent context words are not always "relevant" context words.',
+  'Semantic distinctiveness is not contextual distinctiveness.',
+  # 'Clusters can be described by both presence and absence of context words.',
+  'Clusters may correspond to prototypical patterns within a sense and even highlight specific facets of the sense.'
+  )
+  
+  if (level == 1) {
+    cat(sprintf('-  **%s** \n\n', insights[[level]]))
+  } else if (level > length(insights)) {
+    walk(paste('- ', insights, '\n\n'), cat)
+  } else {
+    walk(paste('- ', insights[1:level-1], '\n\n'), cat)
+    cat(sprintf('-  **%s** \n\n', insights[[level]]))
+  }
+  level <<- level + 1
 }
 
 ```
@@ -129,7 +146,7 @@ layout: true
 # Outline
 
 ```{r, echo = FALSE, results="asis"}
-printOutline(outline)
+printOutline()
 ```
 
 ---
@@ -137,7 +154,7 @@ printOutline(outline)
 # Outline
 
 ```{r, echo = FALSE, results="asis"}
-printOutline(outline, 1)
+printOutline()
 ```
 
 ---
@@ -145,7 +162,7 @@ printOutline(outline, 1)
 ## Distributional semantics
 
 .bg-dark-blue.b--dark-blue.ba.bw2.br3.shadow-5.mh5.center.white[
-Words with similar distribution are semantically similar.
+.b[Distributional Hypothesis]: Words with similar distribution are semantically similar.
 ]
 
 <br>
@@ -168,9 +185,12 @@ name: vsm-intro
 .center[**word vectors** &rarr; numerical representations of words]
 
 ```{r echo=FALSE}
+tozero <- function(x) if (is.na(x) | x < 0) return(0) else return(x)
+
 vex <- read_csv("data/vectorexample.csv", show_col_types = F) %>%
   select(target, `language/n`, `word/n`, `english/j`, `speak/v`, everything()) %>% 
-  mutate(across(where(is.numeric), round, 2))
+  mutate(across(where(is.numeric), round, 2)) %>% 
+  mutate(across(where(is.numeric), map_dbl, tozero))
 
 kable(slice(vex, 1))
 ```
@@ -179,13 +199,13 @@ kable(slice(vex, 1))
 
 <br> 
 
-$$PMI_{(\mathrm{linguistics}, \mathrm{language})} = \log\frac{p(\mathrm{linguistics}, \mathrm{language})}{p(\mathrm{linguistics})p(\mathrm{language})}$$
+$$PPMI_{(\mathrm{linguistics}, \mathrm{language})} = \max(0, \log\frac{p(\mathrm{linguistics}, \mathrm{language})}{p(\mathrm{linguistics})p(\mathrm{language})})$$
 
 .footnote[
 `r fontawesome("info-circle")`
 Actual values from GloWbE (Global Web-based English corpus), with a window-span of 10 words to either side.
 
-PMI: [Pointwise Mutual information](https://en.wikipedia.org/wiki/Pointwise_mutual_information)
+(P)PMI: [Pointwise Mutual information](https://en.wikipedia.org/wiki/Pointwise_mutual_information)
 
 `r book` Church & Hanks (1989)
 ]
@@ -200,28 +220,9 @@ name: type-level
 
 - Each column is a context feature
 
----
-template: type-level
-
-- Values are PMI
-
+- Values are PPMI
   
 ```{r echo=FALSE, eval=require("kableExtra")}
-kbl(vex, escape=FALSE)
-```
-
----
-template: type-level
-
-- Values are **P**PMI: negative values turned to 0.
-
-
-
-```{r echo=FALSE, eval=require("kableExtra")}
-tozero <- function(x) if (is.na(x) | x < 0) return(0) else return(x)
-
-vex <- vex %>%
-  mutate(across(where(is.numeric), map_dbl, tozero))
 kbl(vex, escape=FALSE)
 ```
 
@@ -277,7 +278,6 @@ vex %>%
   rename(`context feature` = target) %>% kbl()
 ```
 
---
 <br>
 
 .center[
@@ -412,102 +412,305 @@ van der Maaten & Hinton (2008)
 # Outline
 
 ```{r, echo = FALSE, results="asis"}
-printOutline(outline, 2)
+printOutline()
 ```
 
 ---
 
-## (Simplified) assumptions
-
-The adjective and the noun it modifies...
-
-- ...are typically close in the context (for bag-of-words models)
-
-- ...have consistent and close syntactic relationships.
-
-Senses of an adjective often correspond to semantic categories of the noun:
-
-- The more different those categories are, the better the model will disambiguate
-
-<br>
-
-.bg-dark-blue.b--dark-blue.ba.bw2.br3.shadow-5.mh5.center.white[
-How far off are these assumptions?
-]
-
----
-
-# Outline
-
-```{r, echo = FALSE, results="asis"}
-printOutline(outline, 3)
-```
-
----
-
-### Modified noun vs predicated entity `r emo::ji('thinking_face')`
-
-<!-- TODO add examples of occurrences -->
-
-.center[![:img 50%, Plot of heilzaam](img/heilzaam.png)]
-
----
-
-## Frequency + Distinctiveness `r emo::ji('scream')`
-
-<!-- TODO highlight some groups? Maybe check the kinds of nouns... -->
 .pull-left[
-![:img 90%, Plot of hoekig](img/hoekig.png)
+
+## Materials
+
+- Corpus of Dutch and Flemish Newspapers
+
+    + 520MW
+    
+    + 1990-2004
+    
+- From 13 different adjectives, 240-320 random occurrences
+
+- Manual annotation based on dictionary senses
+
+- About 200 models combining different parameter settings
+
 ]
 
 --
 
 .pull-right[
-![:img 90%, Plot of hachelijk](img/hachelijk.png)
+
+## Examples
+
+- *heilzaam* 'healthy/beneficial'
+
+- *hachelijk* 'dangerous/critical'
+
+- *hoekig*
+
+    - 'angular' with physical objects, e.g. *wolkenkrabber* 'skyscraper'
+    
+    - 'broken' with rhythms and movements
+    
+- *geldig* 'valid'
+
+    - based on rules, e.g. 'valid passport'
+    
+    - more general sense, e.g. 'valid reasoning'
+
 ]
 
 ---
 
-## Combination of context words `r emo::ji('star_struck')`
+## Starting points
 
-<!-- TODO circle and show positie/situatie -->
+.pull-left[
 
-.center[![:img 50%, Plot of hachelijk](img/hachelijk.png)]
+### Some assumptions
+
+- Modified noun as:
+
+    - typically close to the adjective
+
+    - more salient than other context features
+
+    - indicative of the sense of the adjective
+
+- The more different the semantic categories of the noun, the easier it should be to model the adjective.
+]
+
+--
+
+.pull-right[
+
+### Examples
+
+- *hoekig* and *geldig* should be easy to model because of the clear categories of its nouns
+
+- *hachelijk* would be harder to model; even human annotators had some issues
+
+- the categories of the nouns for *heilzaam* may be less clear but the health/non-health context should be
+
+]
+
+
+---
+
+# Outline
+
+.pull-left[
+
+```{r, echo = FALSE, results="asis"}
+printOutline()
+```
+
+]
+
+--
+.pull-right[
+.bg-dark-blue.b--dark-blue.ba.bw2.br3.shadow-5.mh5.center.white[
+Distributional patterns and semantic categories are different things.
+]
+
+- Modified noun &ne; predicated entity
+
+- Distributional distinctiveness &ne; semantic distinctiveness
+
+- Internal sense structure
+
+]
+
+---
+
+## Modified noun &ne; predicated entity `r emo::ji('thinking_face')`
+
+--
+
+- Dictionary examples of *heilzaam*: *heilzame drank* 'healthy drink', *heilzame raad* 'good advice'
+
+--
+
+- Only half the examples covered by such constructions
+
+---
+
+.sidetitle[
+### Heilzaam
+]
+
+.left-column[
+
+<br>
+
+.center[![Legend for the heilzaam plot](img/heilzaam-legend.png)]
+]
+
+.right-column[
+.center[![:img 50%, Plot of heilzaam](img/heilzaam-no-legend.png)]
+]
+
+---
+
+.sidetitle[
+### Heilzaam
+]
+
+.center[![:img 90%, Plot of heilzaam with contexts](img/heilzaam-contexts.png)]
+
+---
+
+### Insights
+
+```{r, echo = FALSE, results="asis"}
+printInsights()
+```
+
+
+???
+
+- The clusters of *heilzaam* do not discriminate the dictionary senses.
+
+- Instead, they identify typical constructions:
+
+    + with different, frequent context words meaning 'effect/influence';
+    
+    + predicative and attributive constructions without the bridging noun.
+
+---
+
+## Distributional distinctiveness &ne; semantic distinctiveness `r emo::ji('scream')`
+
+- The senses of *hoekig* are clearly distinguished by the kinds of modified nouns:
+
+    + physical objects for *angular* (*hoekige wolkenkrabber* 'angulous skyscraper')
+    
+    + movements, rhythms for *not-fluid* (*hoekige dans* 'broken dance')
+    
+    + people for a third, infrequent sense
+    
+- The senses of *hachelijk* occur with less distinct entities:
+
+    + states/situations that can be dangerous (potentially, in the future)
+    
+    + currently dangerous/critical states/situation
+
+--
+
+- Human annotators have higher agreement with *hoekig* than with *hachelijk*
+--
+ but contextual patterns are more clear with *hachelijk* than with *hoekig*.
+
+---
+
+
+.sidetitle[
+### Hachelijk & hoekig
+]
+
+.center[
+
+<br><br>
+
+![:img 90%, Plot of hoekig](img/hoekig-hachelijk.png)
+]
+
+---
+
+### Insights
+
+```{r, echo = FALSE, results="asis"}
+printInsights()
+```
+
+
+???
+
+- Clear semantic categories may not have distinctive contextual patterns.
+
+- Similarity of infrequent context words may not be enough.
 
 ---
 
 ## Internal sense structure `r emo::ji('monocle')`
 
-<!-- TODO add circles with the highest context words -->
+- Clusters may be dominated by **groups of similar context words**, such as *muziek* 'music', *klinken* 'to sound', *ritme* 'rhythm', *gitaar* 'guitar'...
 
-.center[![:img 50%, Plot of geldig](img/geldig.png)]
+- In *geldig*, the 'valid because of a rule' sense (e.g. 'valid passport') is much more frequent than the general sense (e.g. 'valid argument')
+
+- Clusters are formed within the most frequent sense, highlighting specific facets.
+
+---
+
+.sidetitle[
+### Geldig
+]
+
+.center[![:img 80%, Plot of geldig with boxes](img/geldig-boxes.png)]
+
+---
+
+### Insights
+
+```{r, echo = FALSE, results="asis"}
+printInsights()
+```
+
+
+???
+
+- Within the majority sense of 'valid because of a rule', we have:
+
+    + focus on votes that are valid at the time of submission (*geldig uitgebrachte stemmen* 'valid submitted votes');
+    
+    + focus on the price and duration of tickets and transport-related cards (*de kaart is geldig voor een periode van vijf jaar* 'the card is valid for a period of five years');
+    
+    + focus on the possession and submission of valid identity documents (*hij kon geen geldig rijbewijs voorleggen* 'he couldn't produce a valid driving license').
+
 
 ---
 
 # Outline
 
 ```{r, echo = FALSE, results="asis"}
-printOutline(outline, 4)
+printOutline()
 ```
 
 ---
 
-# Insights
+# Summary
 
-- Models do represent contextual patterns. 
---
-But they do not necessarily correspond to semantic phenomena.
-
---
-
-- Their shape and strength correspond to **frequency**, **distinctiveness** and **relatedness** of the context words.
+```{r, echo = FALSE, results="asis"}
+printInsights()
+```
 
 --
 
-- We wanted to model senses with patterns, but we didn't *know* the patterns.
+.bg-dark-blue.b--dark-blue.ba.bw2.br3.shadow-5.mh5.center.white[
+Distributional models show usage patterns, but their actual correspondence to semantic categories is
+.b[an empirical question.]
+]
 
---
-The models do not show the senses, but do teach us about the patterns!
+---
+
+# Summary
+
+Token-level distributional models for polysemy studies are a *hachelijke* 'perilous' but *geldig* 'valid' enterprise:
+
+- We cannot rely blindly on the clustering to replace semantic annotation:
+
+    + clusters can represent parts of senses or be semantically heterogeneous
+    
+    + distributional distinctiveness does not map to semantic distinctiveness
+
+- but they are still a rich source of insight:
+
+    + relative weight of patterns
+    
+    + relationships between patterns
+    
+    + discovery of relevant facets via distributional patterns
+    
+
+
 
 .footnote[
 

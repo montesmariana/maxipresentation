@@ -78,3 +78,12 @@ ctxts_positie <- d$hachelijk[[1]]$coords %>%
   extractContext()
 walk(c('left', 'target', 'right'),
      ~write(map_chr(ctxts_positie, .x), here('adjectives', 'data', sprintf('positie_%s.txt', .x))))
+
+# Context for plots ----
+d$hachelijk$`hachelijk.bound5-5all.PPMIweight.LENGTHFOC.SOCPOSall`$coords %>% 
+  filter(map_lgl(cws, has_element, 'positie/noun')) %>% 
+  mutate(cluster = fct_drop(cluster)) %>% 
+  split(f = .$cluster) %>% 
+  map(slice_sample, n = 1) %>% 
+  map(pull, ctxt) %>% 
+  str_remove_all("</?(strong|sup)>")

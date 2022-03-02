@@ -13,6 +13,16 @@
   top: 4em;
 }
 
+.sidetitle {
+  position : fixed;
+  left: 0em;
+  top: 20em;
+  width: 15em;
+  text-align: right;
+  transform-origin: 0 0;
+  transform: rotate(-90deg);
+}
+
 .mythanks {
   position : fixed;
   left: 27em;
