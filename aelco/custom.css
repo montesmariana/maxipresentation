@@ -1,0 +1,60 @@
+.halfsize {
+  width : 70%;
+}
+
+.smallersize {
+  width : 50%;
+}
+
+
+.myh {
+  position : fixed;
+  left: 23em;
+  top: 10em;
+}
+
+.mytitle {
+  position : fixed;
+  left: 24em;
+  top: 4em;
+}
+
+.sidetitle {
+  position : fixed;
+  left: 0em;
+  top: 20em;
+  width: 15em;
+  text-align: right;
+  transform-origin: 0 0;
+  transform: rotate(-90deg);
+}
+
+.mythanks {
+  position : fixed;
+  left: 27em;
+  top: 8em;
+}
+/* Use green cloud for all unordered lists */
+ul > li {
+  list-style-image: url(../icons/cloud-blue.png);
+}
+
+/* Edit color of header in distance matrix */
+.dist thead th:nth-child(2) {
+  color: #E69F00;
+}
+.dist thead th:nth-child(3) {
+  color: #56B4E9;
+}
+.dist thead th:nth-child(4) {
+  color: #009E73;
+}
+
+.date-footnote {
+    position: absolute;
+    bottom: 0px;
+    left: 35px;
+    height: 40px;
+    color: #0266a0;
+    font-size: 0.9rem;
+}
