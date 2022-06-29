@@ -759,7 +759,7 @@ class: title-slide
 
 [dirk.geeraerts@kuleuven.be](mailto:dirk.geeraerts@kuleuven.be)
 
-`r icon_style(fontawesome("external-link-alt"), fill="#0266a0")` [https://slides.montesmariana.me/aelco](https://slides.montesmariana.me/aelco)
+`r icon_style(fontawesome("external-link-alt"), fill="#0266a0")` [https://slides.marianamontes.me/aelco](https://slides.marianamontes.me/aelco)
 ]
 
 ---
